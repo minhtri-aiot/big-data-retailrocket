@@ -1,0 +1,9 @@
+{
+  "run_id": "graph-full-20261024",
+  "model_version": "graph-graph-full-20261024-v1",
+  "sha256": {
+    "session_neighbors.sqlite": "f55c16fee1771d19e5b0f494fac00804e6151920cdd62ad02bf9ca1aa7347812",
+    "seen_items.sqlite": "52533bb42a178389d18b3a423f416d0c1fa4b3bcea6945b2cae2de13aedcc714",
+    "model_bundle.json": "b7f38f4b5a8b1010db25ca9c5ad69722dfdebbb0230651226b53f0ec5cb7dcd9"
+  }
+}

@@ -1,84 +1,55 @@
-# Phase 5 — Spark MLlib ALS và đánh giá gợi ý
+# Phase 5 — xây dựng và đánh giá Graph bằng Apache Spark
 
-## Đầu vào và kết quả
+Entry point chính: `pipeline.graph_training.train_model`. `pipeline.train.train_model` chuyển tiếp sang entry point này để tương thích import cũ. Hàm `train_als_legacy` chỉ giữ để tái tạo lịch sử; runner, full_train và worker không gọi nó.
 
-`pipeline.train.train_model(spark, run_root, run_id, quick=True, top_k=10)` đọc Delta Silver qua `pipeline.config.lake_path`. Trong Compose, nguồn là HDFS `hdfs://namenode:8020/ecommerce/runs/<run_id>/delta/silver`; khi không đặt `LAKE_BASE_URI`, nguồn là `<run_root>/delta/silver` để kiểm thử cục bộ. Hàm chỉ đọc các sự kiện đã được Phase 3–4 xác thực. `event_id`/`eventid` loại trùng ổn định trước khi huấn luyện.
+## Đầu vào và tiền xử lý
 
-Hành vi được quy thành độ mạnh tương tác: `view=1`, `addtocart=3`, `transaction=5`. Review không có trong RetailRocket gốc và không tham gia tín hiệu ALS. Các ID phải là số nguyên không âm trong miền 32 bit; hệ thống kiểm tra trước khi cast, giữ nguyên ID cho API, không âm thầm cắt tràn hoặc đổi mã.
+Pipeline tích hợp đọc **Delta Silver được pin bằng versionAsOf**. Standalone CLI đọc CSV, Parquet hoặc Delta và lưu nguồn/checksum hoặc phiên bản Delta trong `graph_plan.json`. ID nguyên không âm 32 bit, timestamp epoch milliseconds dương, loại sự kiện hợp lệ; bản ghi transaction phải có transactionid hợp lệ nếu cột này hiện diện. Dữ liệu sai làm job thất bại, không bị bỏ im lặng. Reviews không tham gia mô hình. Loại trùng theo các trường gốc hiện có trước khi bỏ cột phụ.
 
-Pipeline Spark ML thực sự có hai stage:
+Spark giữ các cột timestamp/visitorid/itemid/event để train. Không collect toàn bộ dữ liệu về NumPy/Pandas. Các phép groupBy, window, self-join, đếm support, chọn top hàng xóm đều do Spark SQL thực hiện. Đây là đồ thị quan hệ hành vi, **không phải GNN** và không yêu cầu GraphX/GraphFrames.
 
-1. `VectorAssembler` ghép `view_count`, `cart_count`, `purchase_count` thành `interaction_features`, phục vụ kiểm tra đặc trưng và lưu cùng pipeline.
-2. `ALS(implicitPrefs=True)` học ma trận nhân tố từ `visitorid`, `itemid`, `rating`; `rating=view_count+3*cart_count+5*purchase_count`.
+## Item–Item
 
-ALS không nhận vector `interaction_features` làm đầu vào. VectorAssembler và ALS tồn tại trong cùng Pipeline đúng API MLlib; ALS sử dụng ba cột mà thuật toán yêu cầu. Không dùng RandomForest hoặc nhãn rating giả để thay thế bài toán gợi ý tương tác ngầm định.
+Mỗi visitor đóng góp một lần cho một item, giữ tối đa 20 item phân biệt mới nhất (timestamp giảm dần; hòa thì item ID tăng). Gọi n(A) là số visitor có A sau cap, n(A,B) là số visitor có cả A và B:
 
-## Chia thời gian và chọn tham số
+`co(A,B) = n(A,B)/n(A) × n(A,B)/(n(A,B)+3)`.
 
-Các mốc xấp xỉ phân vị 50%, 70%, 85% lấy từ **timestamp của sự kiện thô đã làm sạch, trước khi tổng hợp user-item**. Mọi sự kiện cùng timestamp ở cùng một phía của ranh giới. Các khoảng đều dùng quy tắc `train <= mốc`, `validation > mốc trước và <= mốc sau`; do đó không có timestamp tương lai lọt vào train của fold tương ứng.
+Cạnh có hướng vì mẫu số là support của A. Giữ top 100 cạnh/seed, score giảm rồi ID tăng. Cap giúp chặn chi phí self-join, đồng thời có thể làm mất quan hệ dài hạn; không tuyên bố giữ mọi cặp lịch sử.
 
-| Bước | Dữ liệu fit | Dữ liệu đánh giá |
-|---|---|---|
-| Rolling fold 1 | Đầu nguồn đến mốc 50% | Sau 50% đến 70% |
-| Rolling fold 2 | Đầu nguồn đến mốc 70% | Sau 70% đến 85% |
-| Đánh giá cuối | Đầu nguồn đến mốc 85% | Sau mốc 85%, chưa dùng để chọn tham số |
-| Fit phục vụ API | Toàn bộ sự kiện quan sát được | Không tính lại kết quả test trên model này |
+## Session Transition
 
-Mỗi fold tự tổng hợp tương tác từ phần train của mình. Đặc trưng/gold interactions của toàn dữ liệu không được dùng làm đầu vào cho fold sớm hơn. Mô hình được chọn theo trung bình NDCG@K qua **hai fold hợp lệ**, dùng Recall@K làm tiêu chí phụ; thứ tự grid cố định giải quyết trường hợp hòa.
+Spark nhóm timestamp theo visitor, tạo phiên mới nếu gap **>30 phút**. Các item đồng timestamp là một nhóm. Từ mỗi nhóm, nối từng item A sang từng item B **mới trong phiên** ở nhóm timestamp kế tiếp. Đếm số lần A→B; top 100 cạnh/seed. Không nối đồng timestamp, không nối xuyên gap và không nối đến item đã xuất hiện trước trong cùng phiên. `score` của nhánh này là số lần chuyển tiếp, chuẩn hóa khi xếp hạng.
 
-- Quick: rank 8; regularization 0.05 và 0.1; alpha 20. Có 2 ứng viên × 2 fold = 4 lần fit chọn tham số, mỗi lần 3 iteration. Model đánh giá cuối và model phục vụ chạy 5 iteration mỗi model.
-- Full: rank 8/16 × regularization 0.05/0.1 × alpha 10/20 = 8 ứng viên × 2 fold = 16 lần fit; cộng model đánh giá và model phục vụ, mỗi lần 10 iteration. Chi phí lớn hơn; không tự động coi chạy mẫu quick là bằng chứng đã huấn luyện toàn nguồn.
-- Seed cố định 42. Bản ghi `cross_validation` lưu tham số và kết quả của từng fold; `selected_parameters` ghi cấu hình được chọn.
+## Xếp hạng
 
-Hàm báo lỗi nếu dữ liệu quá ít, mốc thời gian không tách được, test rỗng hoặc không có đích validation mới trong cả hai fold. Không tự tạo tương tác hoặc điểm đánh giá để hoàn thành báo cáo.
+Chọn tối đa 5 seed phân biệt gần nhất trong 100 sự kiện context. Trọng số sự kiện 1/1/1, không decay theo đồng hồ, affinity theo vị trí `0.8^r`. Mỗi seed/nhánh chia điểm cạnh cho cạnh lớn nhất rồi lấy căn bậc hai:
 
-## Chỉ số xếp hạng đúng bài toán
+`score(B) = Σ affinity(A) × [0.75 sqrt(co(A,B)/max_co(A)) + 0.25 sqrt(tr(A,B)/max_tr(A))]`.
 
-Test đo khả năng gợi ý **item mới với người dùng**. Các cặp đã xuất hiện trong lịch sử train được bỏ khỏi target, vì API chủ động loại item đã xem. `excluded_repeat_pairs` báo số cặp bị loại. User/item chưa được học trong train vẫn ở mẫu test và được tính là miss; `cold_users` và `cold_item_pairs` chỉ rõ giới hạn này.
+Nhánh thiếu cạnh đóng góp 0. Loại seen; hòa score thì ID tăng; bù phổ biến nếu chưa đủ K. Điểm là độ liên quan, không phải xác suất. Chính `score_context` được dùng để chấm offline và trả API.
 
-- Precision@K = số item gợi ý đúng / K. Danh sách ngắn vẫn dùng mẫu số K.
-- Recall@K = số item gợi ý đúng / số item liên quan mới của user trong holdout.
-- NDCG@K dùng relevance nhị phân và chiết khấu `1/log2(vị trí+1)`, chuẩn hóa theo xếp hạng lý tưởng của user.
-- Catalog coverage = số item train xuất hiện trong kết quả gợi ý / kích thước catalog của model train.
-- User coverage = số user có ít nhất một gợi ý / số user có đích holdout mới.
+## Chia dữ liệu và giao thức
 
-Các chỉ số là trung bình theo user, bao gồm cold user bị miss. Không báo RMSE cho nhãn ngầm định, không bỏ cold user để làm điểm đẹp hơn, không dùng điểm confidence ALS như xác suất mua. Nếu không còn target mới, trạng thái là `not_evaluable_no_novel_targets` và chỉ số để `null`.
+Mốc xấp xỉ phân vị timestamp của các dòng sự kiện 50/70/85%, sai số phân vị ≤0.001; giữ timestamp bằng nhau cùng phía. Hai validation folds 50→70 và 70→85; fit test đến 85%, chấm đoạn sau. Mặc định cấu hình cố định 75/25; full-grid thử transition weight 0.1/0.25/0.4/0.5, chọn trung bình validation NDCG rồi Recall rồi Precision. Không dùng test chọn họ mô hình hoặc chuyển sang ALS.
 
-Dữ liệu mẫu 10.000 dòng có thể rất thưa, nhiều người chỉ tương tác một lần và nhiều item mới ở đoạn sau; chỉ số có thể bằng 0 hoặc coverage thấp. Đó là kết quả cần trình bày trung thực. Chỉ số offline không chứng minh tăng doanh thu hay hiệu quả A/B test thực tế.
+Mỗi phiên tối đa một query tại nhóm timestamp mới đầu tiên sau cutoff có context quá khứ. Label gồm mọi item **mới trong phiên** từ thời điểm này đến cuối phiên/kỳ đánh giá. Context chỉ có timestamp nhỏ hơn target; seen là toàn bộ item trước target của phiên, dù context truyền scorer chặn 100 sự kiện. Lấy tối đa 5.000 query theo SHA256(visitorid:session_start:42), trước khi chấm. Phiên đơn sự kiện không đủ điều kiện; report ghi số active/eligible để tránh diễn giải thành kết quả cho toàn bộ khách.
 
-## Gợi ý, lưu model và bộ nhớ
+Cold user/item vẫn nằm trong query/labels. Không negative sampling, không loại miss do không có cạnh. Graph chỉ fit lịch sử trước cutoff, popularity cũng chỉ lấy lịch sử đó. ALS benchmark (khi yêu cầu) dùng chính cutoff/cohort/labels/K/seen/fallback; khác biệt đầu vào được công bố: ALS dùng user factor lịch sử, Graph dùng context phiên. ALS baseline không tune và không fold-in user mới từ context. Không xem đây là bằng chứng thuần túy tách biệt hai thuật toán ở điều kiện thông tin giống hệt nhau.
 
-MLlib tính top-N từ nhân tố đã học. Để loại item đã xem mà vẫn lấy đủ top-K, user đã thấy `s` item cần tối đa `K+s` ứng viên thô; hệ thống chia user theo các mức lũy thừa hai và chặn ở kích thước catalog. User ít lịch sử không bị áp cùng ngân sách ứng viên với user hoạt động nhiều nhất. Sau khi loại seen, kết quả sắp theo score giảm dần, ID tăng dần và lấy K; điểm NaN/vô hạn không được xuất.
+Các metric macro/query: Precision = hit/K; Recall = hit/số label; NDCG relevance nhị phân với chiết khấu log2; HitRate = 1 nếu query có ít nhất một hit, ngược lại 0. Không query thì metric null, status not_evaluable. HitRate không đồng nghĩa Recall ở bài toán nhiều label.
 
-Các file được tạo dưới thư mục run:
+## Artifact
 
-| Đường dẫn | Nội dung |
+| Tệp trong run | Nội dung |
 |---|---|
-| `models/evaluation_pipeline/` | Pipeline fit trước thời điểm test; dùng cho kết quả đánh giá |
-| `models/als_pipeline/` | Pipeline cuối fit toàn dữ liệu quan sát, phục vụ hệ thống |
-| `models/recommendations/` | Parquet phân tán của toàn bộ user được ALS học: user, item, score, rank |
-| `metrics/model_metrics.json` | Chia thời gian, grid, fold, tham số chọn, held-out metrics và phạm vi phục vụ |
-| `serving/model_bundle.json` | Metadata và gợi ý JSON cho tối đa 5.000 user mặc định |
-| `serving/seen_items.sqlite` | Chỉ mục seen cho **toàn bộ user/item đã quan sát trong Silver**, gồm cả đoạn holdout |
+| `models/validation-*.sqlite` | Các đồ thị chỉ fit train của validation fold |
+| `models/evaluation_graph.sqlite` | Đồ thị fit trước cutoff test |
+| `metrics/graph_plan.json`, `graph_validation.json` | Nguồn/split/cấu hình/chọn validation |
+| `metrics/test_rankings.jsonl` | Context, seen, label, prediction từng query; tự tính lại metric |
+| `metrics/model_metrics.json`, `kpis.json` | Kết quả thực đo và số đếm nguồn |
+| `serving/model_bundle.json` | algorithm=graph_session, version, config, popularity, metrics |
+| `serving/session_neighbors.sqlite` | Bảng neighbors, transitions, user_context, metadata phiên bản |
+| `serving/seen_items.sqlite` | Toàn bộ cặp lịch sử để lọc seen khi có visitor ID |
+| `serving/manifest.json` | SHA-256 bundle và SQLite |
 
-Sau khi đóng băng test metrics, model phục vụ được fit lại toàn nguồn để dùng tương tác mới nhất. `metric_model_version` và `serving_model_version` phân biệt hai model này. Việc dùng toàn bộ lịch sử cho **phục vụ sau đánh giá** không được đưa ngược vào phép đo test.
-
-`BIGDATA_SERVING_MAX_USERS` đổi giới hạn số user xuất gợi ý JSON (mặc định 5000). JSON chỉ chứa lịch sử của nhóm user xuất này; SQLite chứa lịch sử của mọi user, được ghi bằng iterator/batch 1.000 cặp nên không gom toàn bộ lịch sử vào driver. API truy vấn sidecar để fallback cho user ngoài phạm vi JSON và vẫn loại toàn bộ item đã thấy. User mới dùng mức phổ biến toàn nguồn. Danh sách phổ biến có tối đa `max(1000,20*K)` item, nên fallback có thể ít hơn K nếu người dùng đã thấy hết nhóm này.
-
-Model và index SQLite được ghi xong trước khi file bundle được đổi tên nguyên tử để công bố. Runner chỉ chuyển `latest_run` sau khi mọi bước của run thành công. Training từ chối ghi đè model/bundle đã tồn tại; retrain cần run ID mới để giữ phiên bản có thể kiểm tra lại.
-
-## Kiểm chứng
-
-Kiểm thử thuần Python kiểm tra giá trị metric đã biết, cold/missing prediction, chống đếm ID trùng, ranh giới thời gian, grid có nhiều ứng viên và SQLite đầy đủ lịch sử user ngoài phạm vi JSON:
-
-```powershell
-python -m unittest discover -s tests -p test_training.py -v
-```
-
-Kiểm thử Spark thật là opt-in, chạy trong image có Java/PySpark:
-
-```powershell
-docker compose run --rm -e BIGDATA_RUN_SPARK_ML_TESTS=1 app python -m unittest discover -s tests -p test_training.py -v
-```
-
-Kiểm thử này thực sự fit ALS, sinh gợi ý không trùng seen, kiểm tra chỉ số với cold user/item, lưu Pipeline và nạp lại. Chạy kiểm thử thuần Python chỉ chứng minh các hàm thuần và hợp đồng; không được ghi nhận đó là bằng chứng toàn pipeline huấn luyện thành công. Bằng chứng chạy end-to-end, số dữ liệu và model metrics thực tế nằm trong thư mục run/evidence do runner tạo.
+Metrics được cố định trước refit toàn nguồn. `model_version` của bundle và scorer bằng nhau; `metric_model_version` ghi graph đánh giá trước cutoff. Artifact mới nằm trong run mới; chỉ đổi pointer sau khi job và các bước bắt buộc thành công. Runner còn yêu cầu registry MongoDB/Redis thành công. API xác thực checksum/index metadata trước khi dùng run mới.

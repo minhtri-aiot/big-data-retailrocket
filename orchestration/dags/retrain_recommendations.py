@@ -12,7 +12,7 @@ from airflow.sensors.python import PythonSensor
 
 def submit(**context):
     base = os.getenv("JOB_WORKER_URL", "http://job-worker:9000").rstrip("/")
-    body = json.dumps({"request_id": context["dag_run"].run_id, "quick": True}).encode()
+    body = json.dumps({"request_id": context["dag_run"].run_id, "quick": True, "algorithm": "graph_session"}).encode()
     request = urllib.request.Request(base + "/jobs/retrain", data=body, headers={"Content-Type": "application/json"}, method="POST")
     with urllib.request.urlopen(request, timeout=30) as response:
         result = json.load(response)
@@ -28,12 +28,14 @@ def completed(**context):
         result = json.load(response)
     if result["status"] == "failed":
         raise AirflowException(result.get("error", "Retraining failed"))
+    if result["status"] == "completed" and result.get("result", {}).get("algorithm") != "graph_session":
+        raise AirflowException("Refusing a non-Graph training result")
     return result["status"] == "completed"
 
 
 with DAG(
     dag_id="retailrocket_daily_retrain",
-    description="Snapshot accepted events, rebuild lake/features, evaluate ALS and atomically activate model",
+    description="Snapshot accepted events, rebuild lake/features, evaluate Graph and atomically activate the versioned Graph artifact",
     schedule="0 2 * * *",
     start_date=pendulum.datetime(2026, 10, 21, tz="Asia/Ho_Chi_Minh"),
     catchup=False, max_active_runs=1,

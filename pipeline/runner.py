@@ -1,4 +1,4 @@
-"""One integrated execution: Kafka -> Spark -> Delta/HDFS -> NoSQL -> ALS -> serving."""
+"""One integrated execution: Kafka -> Spark -> Delta/HDFS -> NoSQL -> Graph -> serving."""
 from __future__ import annotations
 
 import argparse
@@ -36,6 +36,8 @@ def publish_model_registry(root, run_id, mongo_uri, redis_url):
     from pymongo import MongoClient
     import redis
     bundle = json.loads((root / "serving/model_bundle.json").read_text(encoding="utf-8"))
+    if bundle.get("algorithm") != "graph_session":
+        raise ValueError("Only the Phase 5 Graph model can enter the active registry")
     registry = {key: bundle.get(key) for key in ("run_id", "model_version", "trained_at_utc", "algorithm", "metrics")}
     with MongoClient(mongo_uri, serverSelectionTimeoutMS=5000) as client:
         collection = client.bigdata.model_registry
@@ -117,8 +119,8 @@ def execute(run_id, output_root="outputs", input_csv="data/sample/events_10000.c
             from pipeline.online import publish_features
             note("online_mongodb_redis_features")
             report["stages"]["nosql"] = publish_features(spark, str(root), run_id, mongo_uri, redis_url)
-            from pipeline.train import train_model
-            note("als_temporal_cross_validation_and_training")
+            from pipeline.graph_training import train_model
+            note("graph_temporal_validation_and_training")
             report["stages"]["training"] = train_model(spark, str(root), run_id, quick=quick)
             if run_acid:
                 from pipeline.acid_check import verify_acid

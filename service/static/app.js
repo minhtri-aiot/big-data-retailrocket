@@ -67,14 +67,14 @@ function showKpis(data) {
 }
 function showModel(data) {
   const policy = data.model_metrics?.selected_policy;
-  $("model-algorithm").textContent = data.algorithm === "als_popularity_hybrid" && policy?.als_weight === 1 ? `ALS + dự phòng ${policy.popularity_window_days || "toàn lịch sử"}${policy.popularity_window_days ? " ngày" : ""}` : ({als_popularity_hybrid:"ALS + độ phổ biến", popularity_recent:"Độ phổ biến theo thời gian", item_knn_hybrid:"Item-item + dự phòng"})[data.algorithm] || "Implicit ALS";
+  $("model-algorithm").textContent = data.algorithm === "als_popularity_hybrid" && policy?.als_weight === 1 ? `ALS + dự phòng ${policy.popularity_window_days || "toàn lịch sử"}${policy.popularity_window_days ? " ngày" : ""}` : ({graph_session:"Graph · Item–Item + Session Transition",als_popularity_hybrid:"ALS + độ phổ biến", popularity_recent:"Độ phổ biến theo thời gian", item_knn_hybrid:"Item-item + dự phòng"})[data.algorithm] || "Chưa xác định";
   $("model-version").textContent = data.model_version;
   $("trained-at").textContent = data.trained_at_utc;
   $("metric-model-version").textContent = data.metric_model_version || "Chưa công bố";
-  $("exported-users").textContent = format(data.exported_recommendation_users);
+  $("exported-users").textContent = data.algorithm === "graph_session" ? "Graph theo ngữ cảnh · tính khi có yêu cầu" : format(data.exported_recommendation_users);
   const metrics = data.model_metrics?.heldout_test || data.model_metrics?.test || data.model_metrics;
   $("model-metrics").replaceChildren();
-  for (const [keys, label] of [[["precision_at_k", "precision@k"], "Precision@K"], [["recall_at_k", "recall@k"], "Recall@K"], [["ndcg_at_k", "ndcg@k"], "NDCG@K"]]) {
+  for (const [keys, label] of [[["precision_at_k", "precision@k"], "Precision@K"], [["recall_at_k", "recall@k"], "Recall@K"], [["ndcg_at_k", "ndcg@k"], "NDCG@K"], [["hit_rate_at_k"], "HitRate@K"]]) {
     const value = first(metrics, keys); const node = el("div", "metric-small"); node.append(el("span", "", label.replace("@K", `@${metrics?.k || data.model_metrics?.top_k || 10}`)), el("strong", "", percent(value))); $("model-metrics").append(node);
   }
   if (metrics?.population_eligible_users && metrics.population_eligible_users > metrics.eligible_users) {
@@ -204,7 +204,7 @@ function showSessionMetrics(data) {
   const metrics = session.metrics || {};
   const nested = value => value?.metrics || value;
   const selected = nested(metrics.selected);
-  const served = nested(metrics.selected_model_promoted === true ? metrics.selected : metrics.current_item_item);
+  const served = nested(metrics.served || (metrics.selected_model_promoted === true ? metrics.selected : metrics.current_item_item));
   const baseline = nested(metrics.popularity || metrics.popularity_baseline);
   if (!selected || !served) { target.append(el("p", "muted", "Chưa công bố chỉ số cho mô hình đang phục vụ.")); quality.append(el("p", "muted", "Chưa có chỉ số đã xác thực.")); $("quality-scope").textContent = "Chưa có báo cáo"; $("quality-protocol").textContent = "Chưa có chỉ số hợp lệ của mô hình đang chọn."; return; }
   const remaining = metrics.protocol_kind === "remaining_session", k = served.k || metrics.k || 10;
@@ -216,7 +216,8 @@ function showSessionMetrics(data) {
   const definitions = [
     ["precision_at_k", `Precision@${k}`, `Trong ${k} gợi ý, có bao nhiêu món trùng đáp án.`, ""],
     ["recall_at_k", `Recall@${k}`, "Tìm được bao nhiêu phần trong các món đúng cần gợi ý.", "featured"],
-    ["ndcg_at_k", `NDCG@${k}`, "Món đúng càng nằm gần đầu danh sách, điểm càng cao.", ""]
+    ["ndcg_at_k", `NDCG@${k}`, "Món đúng càng nằm gần đầu danh sách, điểm càng cao.", ""],
+    ["hit_rate_at_k", `HitRate@${k}`, "Tỷ lệ lượt dự đoán có ít nhất một món đúng.", ""]
   ];
   definitions.forEach(([key, label, description, cls], index) => {
     const card = el("article", `quality-card ${cls}`), heading = el("div", "quality-label", label);
@@ -225,15 +226,17 @@ function showSessionMetrics(data) {
     if (baseline) card.append(el("div", "quality-baseline", `Mốc so sánh phổ biến: ${percent(baseline[key])}`));
     quality.append(card);
   });
-  const rows = metrics.selected_model_promoted === true
+  const rows = data.algorithm === "graph_session"
+    ? [["Graph đang phục vụ", served], ["Phổ biến", baseline], ["ALS đối chứng (cùng cohort)", metrics.als_comparison?.metrics]]
+    : metrics.selected_model_promoted === true
     ? [["Mô hình đang phục vụ", served], ["Bản trước", nested(metrics.current_item_item)], ["Phổ biến", baseline]]
     : [["Mô hình đang phục vụ", served], ["Ứng viên chưa được chọn", selected], ["Phổ biến", baseline]];
   function appendTable(parent, rows) {
     const table = el("table", "session-metric-table"), caption = el("caption", "sr-only", `So sánh các mô hình ở Top ${k}`), head = el("thead"), header = el("tr");
     table.append(caption);
-    for (const label of ["Mô hình", `Precision@${k}`, `Recall@${k}`, `NDCG@${k}`]) { const cell = el("th", "", label); cell.scope = "col"; header.append(cell); }
+    for (const label of ["Mô hình", `Precision@${k}`, `Recall@${k}`, `NDCG@${k}`, `HitRate@${k}`]) { const cell = el("th", "", label); cell.scope = "col"; header.append(cell); }
     head.append(header); table.append(head); const body = el("tbody");
-    rows.forEach(([label, values]) => { if (!values) return; const row = el("tr"), name = el("th", "", label); name.scope = "row"; row.append(name); for (const key of ["precision_at_k", "recall_at_k", "ndcg_at_k"]) row.append(el("td", "", percent(values[key]))); body.append(row); });
+    rows.forEach(([label, values]) => { if (!values) return; const row = el("tr"), name = el("th", "", label); name.scope = "row"; row.append(name); for (const key of ["precision_at_k", "recall_at_k", "ndcg_at_k", "hit_rate_at_k"]) row.append(el("td", "", percent(values[key]))); body.append(row); });
     table.append(body); const wrap = el("div", "table-scroll"); wrap.append(table); parent.append(wrap);
   }
   target.append(el("h3", "", remaining ? "Phép chấm chính · các món mới còn lại trong phiên" : "Phép chấm · món mới tiếp theo"));
@@ -248,6 +251,7 @@ function showSessionMetrics(data) {
     const confirmed = keys.filter(([key]) => (intervals[key]?.percentile_95_interval?.[0] ?? -Infinity) > 0).map(([, label]) => label);
     target.append(el("p", "panel-note", confirmed.length === 3 ? "Khoảng tin cậy 95% của mức tăng so với bản trước dương ở cả ba chỉ số." : `So với bản trước, ${confirmed.length ? `chỉ ${confirmed.join(", ")}` : "chưa có chỉ số nào"} có khoảng tin cậy 95% của mức tăng hoàn toàn dương. Chưa thể khẳng định cải thiện chắc chắn ở cả ba chỉ số.`));
   }
+  if (data.algorithm === "graph_session") target.append(el("p", "panel-note", `Phiên bản Graph: ${data.model_version}. Phiên bản chấm điểm: ${data.metric_model_version}. ALS chỉ là đối chứng khi có số liệu; không tham gia phục vụ.`));
   if (metrics.test_reuse_disclosure) target.append(el("p", "panel-note", "Giới hạn: tập kiểm tra lịch sử đã được xem trong quá trình cải tiến. Cần thêm dữ liệu ở giai đoạn tương lai để xác nhận khả năng tổng quát hóa."));
   const detail = el("details", "method-details"); detail.append(el("summary", "", "Phép chấm bổ sung & thông tin đối chiếu"));
   if (remaining && metrics.next_item?.served) {

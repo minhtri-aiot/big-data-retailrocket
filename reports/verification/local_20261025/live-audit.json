@@ -1,0 +1,253 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-25T01:24:52.494698+00:00",
+  "run_id": "graph-full-20261024",
+  "model_version": "graph-graph-full-20261024-v1",
+  "algorithm": "graph_session",
+  "base_url": "http://127.0.0.1:8002",
+  "main_metrics": {
+    "k": 10,
+    "eligible_queries": 5000,
+    "status": "evaluated",
+    "precision_at_k": 0.041259999999998874,
+    "recall_at_k": 0.28227074387121825,
+    "ndcg_at_k": 0.1967340741010554,
+    "hit_rate_at_k": 0.3446
+  },
+  "checks": {
+    "seen_filter": true,
+    "known_visitor_filter": true,
+    "no_duplicate_ids": true,
+    "isolated_requests": true,
+    "future_rejected": true,
+    "context_changes_ranking": true,
+    "historical_metrics_unchanged": true,
+    "artifacts_unchanged": true
+  },
+  "artifact_sha256": {
+    "outputs/latest_run.json": "785cb911fce30cd831028999a8b01b3bd85d28cb51fd1c82a4c90cc4d40eb92b",
+    "outputs/runs/graph-full-20261024/serving/model_bundle.json": "b7f38f4b5a8b1010db25ca9c5ad69722dfdebbb0230651226b53f0ec5cb7dcd9",
+    "outputs/runs/graph-full-20261024/serving/seen_items.sqlite": "52533bb42a178389d18b3a423f416d0c1fa4b3bcea6945b2cae2de13aedcc714",
+    "outputs/runs/graph-full-20261024/serving/session_neighbors.sqlite": "f55c16fee1771d19e5b0f494fac00804e6151920cdd62ad02bf9ca1aa7347812"
+  },
+  "benchmark": {
+    "requests": 100,
+    "successful": 100,
+    "concurrency": 4,
+    "warmups": 3,
+    "elapsed_seconds": 10.885787400000027,
+    "latency_ms": {
+      "mean": 427.3403209999947,
+      "p50": 407.6874500000258,
+      "p95": 633.9045000000851,
+      "p99": 681.7591999999877
+    },
+    "scope": "Windows host to local Docker HTTP, two fixed seeds; not production SLA"
+  },
+  "examples": {
+    "view": {
+      "run_id": "graph-full-20261024",
+      "data_run_id": "graph-full-20261024",
+      "model_version": "graph-graph-full-20261024-v1",
+      "session_model_version": "graph-graph-full-20261024-v1",
+      "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+      "algorithm": "graph_session",
+      "visitorid": null,
+      "requested_k": 10,
+      "returned": 10,
+      "items": [
+        {
+          "itemid": 238677,
+          "score": 0.9276309271789385
+        },
+        {
+          "itemid": 336437,
+          "score": 0.8943375672974064
+        },
+        {
+          "itemid": 75643,
+          "score": 0.8219684944763449
+        },
+        {
+          "itemid": 407489,
+          "score": 0.8219684944763449
+        },
+        {
+          "itemid": 375846,
+          "score": 0.7432843469848501
+        },
+        {
+          "itemid": 382552,
+          "score": 0.7163649778038146
+        },
+        {
+          "itemid": 35403,
+          "score": 0.6565783998692895
+        },
+        {
+          "itemid": 323328,
+          "score": 0.6565783998692895
+        },
+        {
+          "itemid": 191049,
+          "score": 0.6190866466112976
+        },
+        {
+          "itemid": 322051,
+          "score": 0.6190866466112976
+        }
+      ],
+      "source": "session_strength_fusion",
+      "context_events": 1,
+      "context_items": 1,
+      "matched_seeds": 2,
+      "seen_items_excluded": 1,
+      "history_sources": [],
+      "history_runs": [],
+      "warnings": [],
+      "cache_hit": false,
+      "persistence": "client_context_only",
+      "model_stale": false,
+      "generated_at_utc": "2026-10-25T01:24:37.884536+00:00",
+      "request_ms": 446.786
+    },
+    "purchase": {
+      "run_id": "graph-full-20261024",
+      "data_run_id": "graph-full-20261024",
+      "model_version": "graph-graph-full-20261024-v1",
+      "session_model_version": "graph-graph-full-20261024-v1",
+      "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+      "algorithm": "graph_session",
+      "visitorid": null,
+      "requested_k": 10,
+      "returned": 10,
+      "items": [
+        {
+          "itemid": 238677,
+          "score": 0.9276309271789385
+        },
+        {
+          "itemid": 336437,
+          "score": 0.8943375672974064
+        },
+        {
+          "itemid": 75643,
+          "score": 0.8219684944763449
+        },
+        {
+          "itemid": 407489,
+          "score": 0.8219684944763449
+        },
+        {
+          "itemid": 389158,
+          "score": 0.7861898672502526
+        },
+        {
+          "itemid": 218746,
+          "score": 0.7806735399516669
+        },
+        {
+          "itemid": 375846,
+          "score": 0.7432843469848501
+        },
+        {
+          "itemid": 382552,
+          "score": 0.7163649778038146
+        },
+        {
+          "itemid": 108486,
+          "score": 0.6878183818384741
+        },
+        {
+          "itemid": 51650,
+          "score": 0.6817540558428954
+        }
+      ],
+      "source": "session_strength_fusion",
+      "context_events": 2,
+      "context_items": 2,
+      "matched_seeds": 4,
+      "seen_items_excluded": 2,
+      "history_sources": [],
+      "history_runs": [],
+      "warnings": [],
+      "cache_hit": false,
+      "persistence": "client_context_only",
+      "model_stale": false,
+      "generated_at_utc": "2026-10-25T01:24:38.401445+00:00",
+      "request_ms": 509.396
+    },
+    "known_user": {
+      "run_id": "graph-full-20261024",
+      "data_run_id": "graph-full-20261024",
+      "model_version": "graph-graph-full-20261024-v1",
+      "session_model_version": "graph-graph-full-20261024-v1",
+      "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+      "algorithm": "graph_session",
+      "visitorid": 1000484,
+      "requested_k": 10,
+      "returned": 10,
+      "items": [
+        {
+          "itemid": 238677,
+          "score": 0.9276309271789385
+        },
+        {
+          "itemid": 336437,
+          "score": 0.8943375672974064
+        },
+        {
+          "itemid": 407489,
+          "score": 0.8219684944763449
+        },
+        {
+          "itemid": 375846,
+          "score": 0.7432843469848501
+        },
+        {
+          "itemid": 382552,
+          "score": 0.7163649778038146
+        },
+        {
+          "itemid": 35403,
+          "score": 0.6565783998692895
+        },
+        {
+          "itemid": 323328,
+          "score": 0.6565783998692895
+        },
+        {
+          "itemid": 191049,
+          "score": 0.6190866466112976
+        },
+        {
+          "itemid": 322051,
+          "score": 0.6190866466112976
+        },
+        {
+          "itemid": 313931,
+          "score": 0.5989467796874437
+        }
+      ],
+      "source": "session_strength_fusion",
+      "context_events": 1,
+      "context_items": 1,
+      "matched_seeds": 2,
+      "seen_items_excluded": 2,
+      "history_sources": [
+        "bundle",
+        "sqlite"
+      ],
+      "history_runs": [
+        "graph-full-20261024"
+      ],
+      "warnings": [],
+      "cache_hit": false,
+      "persistence": "client_context_only",
+      "model_stale": false,
+      "generated_at_utc": "2026-10-25T01:24:39.471380+00:00",
+      "request_ms": 528.544
+    }
+  },
+  "scope": "Existing full Graph snapshot serving; no new full training or scheduler run"
+}

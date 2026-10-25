@@ -12,3 +12,7 @@ data/raw/
 *.db
 .DS_Store
 Thumbs.db
+.pytest_cache/
+spark-warehouse/
+metastore_db/
+derby.log

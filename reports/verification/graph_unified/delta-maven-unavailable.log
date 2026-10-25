@@ -1,0 +1,124 @@
+test_build_retry_and_actual_acid_time_travel (test_storage.DeltaIntegrationTests.test_build_retry_and_actual_acid_time_travel) ... :: loading settings :: url = jar:file:/root/.local/lib/python3.12/site-packages/pyspark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /root/.ivy2/cache
+The jars for the packages stored in: /root/.ivy2/jars
+io.delta#delta-spark_2.12 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-39dabea1-8ba3-4538-9bd4-a10684304776;1.0
+	confs: [default]
+You probably access the destination server through a proxy server that is not well configured.
+You probably access the destination server through a proxy server that is not well configured.
+You probably access the destination server through a proxy server that is not well configured.
+You probably access the destination server through a proxy server that is not well configured.
+:: resolution report :: resolve 244ms :: artifacts dl 1ms
+	:: modules in use:
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   1   |   0   |   0   |   0   ||   0   |   0   |
+	---------------------------------------------------------------------
+
+:: problems summary ::
+:::: WARNINGS
+	Host repo1.maven.org not found. url=https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.pom
+
+	Host repo1.maven.org not found. url=https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.jar
+
+	Host repos.spark-packages.org not found. url=https://repos.spark-packages.org/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.pom
+
+	Host repos.spark-packages.org not found. url=https://repos.spark-packages.org/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.jar
+
+		module not found: io.delta#delta-spark_2.12;3.3.3
+
+	==== local-m2-cache: tried
+
+	  file:/root/.m2/repository/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.pom
+
+	  -- artifact io.delta#delta-spark_2.12;3.3.3!delta-spark_2.12.jar:
+
+	  file:/root/.m2/repository/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.jar
+
+	==== local-ivy-cache: tried
+
+	  /root/.ivy2/local/io.delta/delta-spark_2.12/3.3.3/ivys/ivy.xml
+
+	  -- artifact io.delta#delta-spark_2.12;3.3.3!delta-spark_2.12.jar:
+
+	  /root/.ivy2/local/io.delta/delta-spark_2.12/3.3.3/jars/delta-spark_2.12.jar
+
+	==== central: tried
+
+	  https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.pom
+
+	  -- artifact io.delta#delta-spark_2.12;3.3.3!delta-spark_2.12.jar:
+
+	  https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.jar
+
+	==== spark-packages: tried
+
+	  https://repos.spark-packages.org/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.pom
+
+	  -- artifact io.delta#delta-spark_2.12;3.3.3!delta-spark_2.12.jar:
+
+	  https://repos.spark-packages.org/io/delta/delta-spark_2.12/3.3.3/delta-spark_2.12-3.3.3.jar
+
+		::::::::::::::::::::::::::::::::::::::::::::::
+
+		::          UNRESOLVED DEPENDENCIES         ::
+
+		::::::::::::::::::::::::::::::::::::::::::::::
+
+		:: io.delta#delta-spark_2.12;3.3.3: not found
+
+		::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+:: USE VERBOSE OR DEBUG MESSAGE LEVEL FOR MORE DETAILS
+Exception in thread "main" java.lang.RuntimeException: [unresolved dependency: io.delta#delta-spark_2.12;3.3.3: not found]
+	at org.apache.spark.deploy.SparkSubmitUtils$.resolveMavenCoordinates(SparkSubmit.scala:1613)
+	at org.apache.spark.util.DependencyUtils$.resolveMavenDependencies(DependencyUtils.scala:185)
+	at org.apache.spark.deploy.SparkSubmit.prepareSubmitEnvironment(SparkSubmit.scala:339)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:969)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+ERROR
+test_real_mongo_redis_retry_session_bridge_and_seen_set (test_storage.OnlineIntegrationTests.test_real_mongo_redis_retry_session_bridge_and_seen_set) ... skipped 'Set RUN_ONLINE_TESTS=1 with MongoDB/Redis running'
+test_dedup_order_window_and_late_session_bridge (test_storage.ProjectionTests.test_dedup_order_window_and_late_session_bridge) ... ok
+test_retry_replaces_projections_removes_stale_sessions_and_isolates_runs (test_storage.ProjectionTests.test_retry_replaces_projections_removes_stale_sessions_and_isolates_runs) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/collections/__init__.py:595: ResourceWarning: unclosed file <_io.FileIO name=4 mode='wb' closefd=True>
+  def __init__(self, iterable=None, /, **kwds):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_utc_milliseconds_and_missing_metrics (test_storage.ProjectionTests.test_utc_milliseconds_and_missing_metrics) ... ok
+
+======================================================================
+ERROR: test_build_retry_and_actual_acid_time_travel (test_storage.DeltaIntegrationTests.test_build_retry_and_actual_acid_time_travel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/60254e60a929/big-data-retailrocket/tests/test_storage.py", line 206, in test_build_retry_and_actual_acid_time_travel
+    spark = create_spark("local[2]", enable_delta=True, download_jars=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/60254e60a929/big-data-retailrocket/phase3/streaming.py", line 88, in create_spark
+    spark = builder.getOrCreate()
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/lib/python3.12/site-packages/pyspark/sql/session.py", line 497, in getOrCreate
+    sc = SparkContext.getOrCreate(sparkConf)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/lib/python3.12/site-packages/pyspark/context.py", line 515, in getOrCreate
+    SparkContext(conf=conf or SparkConf())
+  File "/root/.local/lib/python3.12/site-packages/pyspark/context.py", line 201, in __init__
+    SparkContext._ensure_initialized(self, gateway=gateway, conf=conf)
+  File "/root/.local/lib/python3.12/site-packages/pyspark/context.py", line 436, in _ensure_initialized
+    SparkContext._gateway = gateway or launch_gateway(conf)
+                                       ^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/lib/python3.12/site-packages/pyspark/java_gateway.py", line 107, in launch_gateway
+    raise PySparkRuntimeError(
+pyspark.errors.exceptions.base.PySparkRuntimeError: [JAVA_GATEWAY_EXITED] Java gateway process exited before sending its port number.
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.448s
+
+FAILED (errors=1, skipped=1)

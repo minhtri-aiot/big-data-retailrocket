@@ -1,82 +1,70 @@
-# RetailRocket — Big Data Phase 1–7
+# RetailRocket — hệ thống gợi ý Graph thống nhất Phase 5–6
 
-Dự án gợi ý sản phẩm từ hành vi xem, thêm giỏ và mua hàng trong dữ liệu RetailRocket. Bản hiện tại có giao diện cửa hàng, tìm kiếm, 19 danh mục minh họa, giỏ mô phỏng và nút **Mua ngay** ngay trên thẻ sản phẩm.
+Mô hình chính duy nhất là **Graph-based Session Recommendation**: Item–Item có điều kiện + Session Transition. Apache Spark xây dựng cả hai đồ thị. FastAPI dùng artifact do Phase 5 xuất; Dashboard đọc đúng metrics của artifact đó. ALS chỉ phục vụ đối chứng, không được tự động chọn làm mô hình phục vụ.
 
-![Giao diện cửa hàng](docs/screenshots/storefront-home.png)
+**Luồng:** RetailRocket → Kafka → Spark → Delta/HDFS + MongoDB/Redis → Graph Training (Phase 5) → FastAPI → Dashboard (Phase 6). Airflow gọi worker huấn luyện lại Graph lúc **02:00 Asia/Ho_Chi_Minh** mỗi ngày.
 
-## Tải bản demo đầy đủ
+## Bắt đầu với bản demo đã train
 
-**[Mở Release và tải `big_data_update_2_storefront_v2.zip`](https://github.com/bluejames1106/big-data-retailrocket/releases/tag/storefront-v2)**
+Tải [bản Graph đã kiểm tra trên Windows/Docker](https://github.com/bluejames1106/big-data-retailrocket/releases/tag/graph-unified-v1).
+Kết quả kiểm tra ngày 25/10/2026 nằm tại [LOCAL_REVIEW_20261025.md](docs/LOCAL_REVIEW_20261025.md).
 
-ZIP gồm toàn bộ mã nguồn, `events.csv`, model đã huấn luyện và các SQLite cần để chạy demo. Mã nguồn để đọc và chỉnh sửa nằm ở gốc repository này; các tệp dữ liệu/model lớn được lưu trong ZIP đính kèm Release.
-
-SHA-256 của ZIP:
-
-```text
-0bcab83532482f9934078c525c2be51eb44ded50aae1a8f2f8fc2e0a41f74fa9
-```
-
-## Chạy demo trên Windows
-
-1. Cài và mở Docker Desktop, dùng Linux containers.
-2. Tải ZIP trong Release, giải nén vào một thư mục ở ổ D.
-3. Mở PowerShell trong thư mục `big_data_update_2` vừa giải nén và chạy:
+Cài Docker Desktop (Linux containers), giải nén mã nguồn vào thư mục mới, mở PowerShell tại thư mục chứa README và chạy:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts\run_local_update2_demo.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run_graph_demo.ps1
 ```
 
-4. Mở **http://localhost:8000/**. Tài liệu API ở **http://localhost:8000/docs**.
+Mở http://localhost:8000/ và http://localhost:8000/docs. Script cài snapshot Graph đi kèm rồi chạy API. Chạy snapshot không cần Kafka, HDFS hoặc Airflow. Đây là kiểm tra luồng phục vụ, không đại diện cho việc chạy lại toàn bộ hạ tầng Big Data. Lần build đầu cần Internet. Xem [hướng dẫn đầy đủ](docs/GRAPH_RUNBOOK.md).
 
-Lần đầu cần Internet để dựng Docker image. Các lần sau, khi mã nguồn không đổi, có thể thêm `-SkipBuild`. Demo dùng snapshot sẵn có, không phải huấn luyện lại. Xem [hướng dẫn cửa hàng](docs/STOREFRONT_DEMO.md) và [hướng dẫn demo cục bộ](LOCAL_DEMO.md).
+## Train Graph
 
-## Tài liệu để báo cáo
+Python 3.11/3.12, Java 17 và các dependencies:
 
-- [Kiến trúc hiện tại](docs/ARCHITECTURE.md): tách pipeline Kafka/Spark khỏi luồng phục vụ graph theo phiên; nêu đúng cấu hình 1/1/1 và công thức strength 75/25.
-- [Ví dụ dữ liệu thật và lời trình bày mẫu](docs/REAL_DATA_EXAMPLE.md): user 1000484, ID 129960 → 75643; dự đoán lịch sử xếp thứ 9, graph full trên dashboard xếp thứ 3.
-- [Kiểm tra chạy ZIP ngày 24/10/2026](docs/ZIP_DEMO_VERIFICATION.md): tải Release, giải nén riêng, volume mới, 76 kiểm thử và 100 yêu cầu HTTP thành công.
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pipeline.graph_training --input data/sample/events_10000.csv --run-id graph-sample-01 --compare-als --activate
+python -m uvicorn service.app:app --host 127.0.0.1 --port 8000
+python -m scripts.verify_graph --run-id graph-sample-01
+```
 
-Các tài liệu cập nhật nằm trên nhánh `main`. ZIP `storefront-v2` giữ snapshot runtime đã kiểm tra; tài liệu cũ bên trong ZIP có thể mô tả các nhánh ALS/thí nghiệm trước. Khi báo cáo kiến trúc hiện tại, dùng các liên kết ở trên.
+Để train toàn nguồn, đặt `events.csv` tại `data/raw/events.csv`, thay `--input` ở lệnh trên và dùng run ID mới. CSV đầy đủ lấy từ nguồn RetailRocket/Kaggle hoặc Release cũ `storefront-v2`; nó không được thay bằng dữ liệu tổng hợp. `--compare-als` chỉ chấm một baseline ALS trên cùng cohort test, không thay đổi họ mô hình. `--full-grid` chọn tỷ lệ chuyển tiếp bằng hai fold validation; mặc định giữ chính sách Graph 75/25 đã chọn.
 
-## Thử các chức năng
+Để đi qua **Kafka → Spark → Storage → Graph**, dùng:
 
-- **Xem**: mở chi tiết và ghi một lượt xem mô phỏng.
-- **+ Giỏ**: thêm vào giỏ mô phỏng và ghi hành vi thêm giỏ.
-- **Mua ngay**: ghi trực tiếp một hành vi mua mô phỏng, rồi cập nhật gợi ý; không tự ghi thêm lượt xem hoặc thêm giỏ.
-- Tìm kiếm và 19 danh mục chỉ lọc bộ sưu tập minh họa. Mục **Dành cho bạn** giữ thứ tự do API/model trả về.
-- **Bắt đầu lại**: xóa ngữ cảnh phiên và giỏ trong tab.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run_demo.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start_scheduler.ps1
+```
 
-Tên, ảnh, danh mục và giá đều là **minh họa được gán cố định theo Item ID**. Chúng không phải metadata sản phẩm thật và không được dùng để huấn luyện. Không có thanh toán hoặc đơn hàng thực tế.
+DAG retrain yêu cầu một run dữ liệu tích hợp còn giữ thư mục `clean/`; snapshot demo chỉ phục vụ API không phải nguồn retrain Kafka. Không dùng snapshot demo để khẳng định scheduler đã chạy.
 
-## Dữ liệu và mô hình
+## Mô hình và đánh giá
 
-- CSV gốc: **2.756.101** dòng; sau làm sạch và khử trùng: **2.755.641** sự kiện.
-- **1.407.580** visitor và **235.061** item phân biệt.
-- Model phiên kết hợp conditional item-item **75%** và chuyển tiếp **25%**, chuẩn hóa độ mạnh liên kết; có dự phòng phổ biến và lọc ID đã tương tác.
-- Snapshot phục vụ: `strength-20261022-v1`.
+- Item–Item: đồng xuất hiện theo visitor nhị phân, giữ tối đa 20 item phân biệt gần nhất/visitor; điểm conditional có shrinkage support.
+- Transition: cạnh từ nhóm timestamp trước đến item mới của nhóm timestamp kế tiếp trong phiên gap 30 phút; không tạo cạnh giữa item đồng timestamp.
+- Tối đa 100 hàng xóm/nhánh/seed, 5 seed gần nhất, decay vị trí 0.8; trọng số view/cart/purchase **1/1/1**. Fusion điểm chuẩn hóa: **75% Item–Item + 25% Transition**, căn bậc hai độ mạnh.
+- Phiên chưa có ngữ cảnh hoặc seed chưa có cạnh: fallback phổ biến của cùng model, loại item đã tương tác. Graph không tự giải quyết item hoàn toàn mới chưa có cạnh.
+- Đánh giá: mọi item mới còn lại trong cùng phiên, K=10; Precision, Recall, NDCG, **HitRate** macro/query. Cold user/item không bị loại để tăng điểm. Đây là dự đoán tương tác, không phải xác suất mua.
+- Temporal folds 50→70%, 70→85%; test sau 85%. Metrics dùng graph fit trước cutoff; graph phục vụ được refit toàn dữ liệu sau khi metrics đã cố định.
 
-## Kết quả đánh giá
+Xem [phân tích ALS và Graph](docs/ALS_VS_GRAPH.md), [kết quả đo của bản này](docs/GRAPH_RESULTS.md), [phạm vi kiểm thử](docs/GRAPH_VALIDATION.md). Các báo cáo cũ dưới `reports/` và tài liệu thí nghiệm còn được giữ để truy vết; chúng không phải số liệu của bản hiện tại.
 
-Phép chấm chính dự đoán **tất cả món mới còn lại trong cùng phiên**, Top 10, trên **5.000 lượt dự đoán**:
+## Tài liệu và mã nguồn
 
-| Chỉ số | Mô hình hiện tại |
-|---|---:|
-| Precision@10 | 4,148% |
-| Recall@10 | 28,2803% |
-| NDCG@10 | 19,7041% |
-
-Đây là số từ báo cáo lịch sử, không được tính từ các lần bấm thử trên giao diện. Phép chấm chỉ một món tiếp theo và phép chấm lịch sử user được báo cáo riêng, không so trực tiếp giữa các phép chấm. Test lịch sử đã được xem trong quá trình phát triển; cần dữ liệu tương lai để xác nhận. So với bản liền trước, chỉ NDCG có khoảng tin cậy mức tăng hoàn toàn dương.
-
-Xem [phương pháp và giới hạn](docs/SESSION_STRENGTH_UPDATE.md), [báo cáo JSON](reports/metrics/session_heldout_comparison.json).
-
-## Cấu trúc mã nguồn
-
-| Thư mục | Nội dung |
+| Đường dẫn | Vai trò |
 |---|---|
-| `pipeline/`, `phase2/`, `phase3/` | Xử lý dữ liệu, huấn luyện và đánh giá |
-| `service/` | FastAPI, gợi ý theo phiên, giao diện cửa hàng |
-| `config/`, `orchestration/` | Cấu hình hệ thống, lịch chạy pipeline |
-| `scripts/`, `tests/` | Lệnh chạy, thí nghiệm, kiểm thử |
-| `docs/`, `reports/`, `provenance/` | Hướng dẫn, số liệu, manifest đối chiếu |
+| `pipeline/graph_training.py` | Train/evaluate/export Graph bằng Spark; CLI độc lập và entry point Delta |
+| `pipeline/session_model.py`, `session_transition.py` | Scorer dùng chung giữa offline/API |
+| `pipeline/runner.py`, `full_train.py` | Pipeline tích hợp và train toàn nguồn qua storage |
+| `service/` | FastAPI + Dashboard; xác thực phiên bản và checksum sidecars |
+| `orchestration/dags/`, `pipeline/job_server.py` | Lịch retrain và worker chỉ chấp nhận Graph |
+| `demo/graph_snapshot/` | Snapshot Graph có thể cài vào outputs, SQLite nén gzip |
+| `tests/`, `reports/verification/graph_unified/` | Kiểm thử và bằng chứng của bản sửa |
 
-ZIP Release giữ nguyên dữ liệu, model và các báo cáo đánh giá của bản demo mới nhất. Repository không kèm Docker image, Docker volume, `.env` riêng hay file tạm.
+Hướng dẫn đưa lên repo đang có: [GITHUB_UPDATE.md](GITHUB_UPDATE.md). Bản mã nguồn này không chứa `.git`, `.env` riêng, Docker volume hoặc Docker image.
+
+Dữ liệu gốc là [Retailrocket recommender system dataset](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset),
+giấy phép [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Snapshot và bản ghi đánh giá được tạo từ bộ dữ liệu nghiên cứu công khai có ID đã băm;
+tên, ảnh, giá trên cửa hàng là minh họa.

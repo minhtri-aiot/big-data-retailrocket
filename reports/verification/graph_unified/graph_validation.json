@@ -1,0 +1,100 @@
+{
+  "folds": [
+    {
+      "cutoff": 1436450667169,
+      "end": 1438557297020,
+      "cohort": {
+        "active_sessions": 358180,
+        "eligible_sessions": 51701,
+        "eligible_queries": 5000,
+        "query_cap": 5000,
+        "selection": "lowest SHA256(visitorid:session_start:42); before scoring",
+        "queries_with_multiple_labels": 1906
+      },
+      "policies": [
+        {
+          "configuration": {
+            "graph": "binary_user",
+            "similarity": "conditional",
+            "fusion": "strength",
+            "transition_weight": 0.25,
+            "strength_power": 0.5,
+            "seed_limit": 5,
+            "position_decay": 0.8,
+            "query_half_life_minutes": null,
+            "event_weights": {
+              "view": 1.0,
+              "addtocart": 1.0,
+              "transaction": 1.0
+            }
+          },
+          "metrics": {
+            "k": 10,
+            "eligible_queries": 5000,
+            "status": "evaluated",
+            "precision_at_k": 0.039419999999998984,
+            "recall_at_k": 0.2577537341907869,
+            "ndcg_at_k": 0.18501109899475232,
+            "hit_rate_at_k": 0.3228
+          }
+        }
+      ]
+    },
+    {
+      "cutoff": 1438557297020,
+      "end": 1440540443918,
+      "cohort": {
+        "active_sessions": 275267,
+        "eligible_sessions": 37615,
+        "eligible_queries": 5000,
+        "query_cap": 5000,
+        "selection": "lowest SHA256(visitorid:session_start:42); before scoring",
+        "queries_with_multiple_labels": 1846
+      },
+      "policies": [
+        {
+          "configuration": {
+            "graph": "binary_user",
+            "similarity": "conditional",
+            "fusion": "strength",
+            "transition_weight": 0.25,
+            "strength_power": 0.5,
+            "seed_limit": 5,
+            "position_decay": 0.8,
+            "query_half_life_minutes": null,
+            "event_weights": {
+              "view": 1.0,
+              "addtocart": 1.0,
+              "transaction": 1.0
+            }
+          },
+          "metrics": {
+            "k": 10,
+            "eligible_queries": 5000,
+            "status": "evaluated",
+            "precision_at_k": 0.04251999999999881,
+            "recall_at_k": 0.2804304219521895,
+            "ndcg_at_k": 0.19155139513968594,
+            "hit_rate_at_k": 0.3494
+          }
+        }
+      ]
+    }
+  ],
+  "selected_configuration": {
+    "graph": "binary_user",
+    "similarity": "conditional",
+    "fusion": "strength",
+    "transition_weight": 0.25,
+    "strength_power": 0.5,
+    "seed_limit": 5,
+    "position_decay": 0.8,
+    "query_half_life_minutes": null,
+    "event_weights": {
+      "view": 1.0,
+      "addtocart": 1.0,
+      "transaction": 1.0
+    }
+  },
+  "selection": "validation mean NDCG then Recall then Precision; fixed policy when quick=True; never ALS"
+}

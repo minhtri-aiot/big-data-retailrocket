@@ -1,4 +1,4 @@
-"""Full CSV -> validated clean -> HDFS Delta -> temporal ALS -> API bundle.
+"""Full CSV -> validated clean -> HDFS Delta -> temporal Graph -> API bundle.
 
 This is OFFLINE MODEL TRAINING, not a claim of full Kafka replay or full Mongo
 facts/session projection. SQLite preserves seen history for every observed user.
@@ -16,10 +16,7 @@ def execute(run_id, input_csv, output_root="outputs", resume=False):
     # Safe full-source defaults also apply when called directly without PS1.
     for key,value in {
         "PYSPARK_SUBMIT_ARGS":"--driver-memory 3g --conf spark.driver.maxResultSize=512m --conf spark.local.dir=/tmp/full_spark_scratch pyspark-shell",
-        "BIGDATA_ALS_RANK":"16", "BIGDATA_ALS_BLOCKS":"6",
-        "BIGDATA_CV_ITERATIONS":"4", "BIGDATA_FINAL_ITERATIONS":"8",
-        "BIGDATA_LOG_CONFIDENCE":"1", "BIGDATA_EVAL_MAX_USERS":"1000",
-        "BIGDATA_BOUND_SERVING":"1", "BIGDATA_SERVING_MAX_USERS":"1000",
+        "GRAPH_EVAL_MAX_QUERIES":"5000",
     }.items():
         os.environ.setdefault(key,value)
     root=run_path(run_id,output_root)
@@ -31,7 +28,7 @@ def execute(run_id, input_csv, output_root="outputs", resume=False):
     if resume:
         report=json.loads((root/"metrics/run_report.json").read_text())
         if report["status"] == "completed": raise ValueError("Already completed")
-        for name in ("evaluation_pipeline","als_pipeline"):
+        for name in ("evaluation_graph.sqlite",):
             if (root/"models"/name).exists():
                 raise ValueError("Preserve partial models before recovery")
         report.update(status="running")
@@ -66,8 +63,8 @@ def execute(run_id, input_csv, output_root="outputs", resume=False):
                 from pipeline.storage import build_lake
                 stage("hdfs_delta_bronze_silver_gold")
                 report["stages"]["lake"]=build_lake(spark,str(root))
-            from pipeline.train import train_model
-            stage("temporal_validation_full_history_ALS")
+            from pipeline.graph_training import train_model
+            stage("temporal_validation_full_history_Graph")
             report["stages"]["training"]=train_model(spark,str(root),run_id,quick=True)
             from pipeline.acid_check import verify_acid
             stage("delta_acid_check")

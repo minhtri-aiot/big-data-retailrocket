@@ -1,3 +1,5 @@
+> **Cập nhật Graph thống nhất:** nội dung bên dưới là hướng dẫn/lịch sử trước khi thống nhất Phase 5–6. Dùng [Runbook hiện hành](GRAPH_RUNBOOK.md) và [kiểm thử bản mới](GRAPH_VALIDATION.md). Không dùng số liệu cũ làm kết quả bản mới.
+
 # Đối chiếu ActionPlan: Phase 1–7, task 1–25
 
 **Ghi chú phiên bản 24/10/2026:** bảng dưới ánh xạ pipeline ban đầu, gồm nhánh

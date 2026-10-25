@@ -24,7 +24,8 @@ def verify(base_url, run_id, output_root):
         assert result["status"] == "completed", "Pipeline is not completed"
         report["checks"]["pipeline_completed"] = True
         bundle = json.loads((root / "serving/model_bundle.json").read_text(encoding="utf-8"))
-        assert bundle["run_id"] == run_id and bundle["algorithm"] == "als_implicit"
+        assert bundle["run_id"] == run_id and bundle["algorithm"] == "graph_session"
+        assert bundle["session_model"]["model_version"] == bundle["model_version"]
         deadline = time.monotonic() + 60
         while True:
             try:
@@ -38,10 +39,10 @@ def verify(base_url, run_id, output_root):
         metrics = get_json(base_url.rstrip("/") + "/api/metrics")
         assert metrics["run_id"] == run_id and metrics["model_version"] == bundle["model_version"]
         assert metrics["kpis"]["silver_events"] >= result["clean_event_count"]
-        assert metrics["kpis"]["ctr"] is None and metrics["kpis"]["revenue"] is None
+        assert metrics["kpis"].get("ctr") is None and metrics["kpis"].get("revenue") is None
         report["checks"]["api_model_and_kpis"] = True
         users = get_json(base_url.rstrip("/") + "/api/users?limit=3")["user_ids"]
-        assert users, "No users exported by ALS serving bundle"
+        assert users, "No snapshot users from Graph training"
         tested = []
         with sqlite3.connect(root / "serving/seen_items.sqlite") as connection:
             omitted = next((int(row[0]) for row in connection.execute("SELECT DISTINCT visitorid FROM seen_items ORDER BY visitorid")

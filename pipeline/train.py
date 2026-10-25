@@ -1,4 +1,4 @@
-"""Leakage-free chronological implicit ALS selection, evaluation and serving export.
+"""Historical ALS helpers retained ONLY for benchmark/reproducibility.
 
 The VectorAssembler creates auditable auxiliary per-pair count features. ALS
 correctly consumes visitorid/itemid/rating, never the assembled feature vector.
@@ -226,7 +226,7 @@ def _selection_grid(quick: bool) -> list[dict]:
             for rank, reg, alpha in itertools.product(ranks, regs, alphas)]
 
 
-def train_model(spark, run_root: str, run_id: str, quick: bool = True, top_k: int = 10) -> dict:
+def train_als_legacy(spark, run_root: str, run_id: str, quick: bool = True, top_k: int = 10) -> dict:
     """Train/evaluate real Spark MLlib ALS, then publish a bounded serving bundle."""
     from pyspark.sql import functions as F
     from .config import lake_path
@@ -431,3 +431,9 @@ def train_model(spark, run_root: str, run_id: str, quick: bool = True, top_k: in
     for frame in (observed, events, test, evaluation_interactions, full_interactions, all_seen, recommendations, selected_users):
         frame.unpersist()
     return report
+
+
+def train_model(spark, run_root, run_id, quick=True, top_k=10):
+    """Compatibility import: the main Phase 5 trainer is now Spark Graph."""
+    from pipeline.graph_training import train_model as train_graph_model
+    return train_graph_model(spark, run_root, run_id, quick, top_k)

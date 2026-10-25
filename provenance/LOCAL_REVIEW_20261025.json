@@ -1,0 +1,27 @@
+{
+  "input_zip_sha256": "6f415299750e1e522b8b26f64b870b6cf3ae35223cdccdb68d84249a4df19d86",
+  "input_files": 238,
+  "source_commit": "1f602e227af5f36257e9280de6eafe205f132f9a",
+  "review_date": "2026-10-25",
+  "user_choice": "Keep ALS as a benchmark only, as supplied in new ZIP",
+  "serving_algorithm": "graph_session",
+  "fixed_snapshot_preserved": true,
+  "patched_files": [
+    "pipeline/graph_training.py",
+    "tests/test_graph_pipeline.py"
+  ],
+  "patch_reason": "Reject a missing event instead of silently dropping it with SQL NULL predicate",
+  "isolated_tests": {
+    "total": 146,
+    "passed": 144,
+    "skipped": 2,
+    "module_exit_codes": "all 17 zero"
+  },
+  "postfix_graph_tests": {
+    "total": 14,
+    "passed": 14,
+    "overlap_with_isolated_suite": 13
+  },
+  "full_data_retrained_in_review": false,
+  "real_scheduler_run_in_review": false
+}

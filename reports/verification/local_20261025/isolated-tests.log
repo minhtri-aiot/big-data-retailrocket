@@ -1,0 +1,878 @@
+
+Running test_graph_pipeline.py in an isolated Python/JVM process
+test_cold_user_cold_item_and_empty_context_fallback (test_graph_pipeline.GraphContracts.test_cold_user_cold_item_and_empty_context_fallback) ... ok
+test_graph_primary_and_static_endpoint_use_same_scorer (test_graph_pipeline.GraphContracts.test_graph_primary_and_static_endpoint_use_same_scorer) ... ok
+test_hitrate_is_not_multilabel_recall (test_graph_pipeline.GraphContracts.test_hitrate_is_not_multilabel_recall) ... ok
+test_invalid_future_and_duplicate_context (test_graph_pipeline.GraphContracts.test_invalid_future_and_duplicate_context) ... ok
+test_malformed_graph_configuration_is_not_ready (test_graph_pipeline.GraphContracts.test_malformed_graph_configuration_is_not_ready) ... ok
+test_runtime_refuses_legacy_als (test_graph_pipeline.GraphContracts.test_runtime_refuses_legacy_als) ... ok
+test_wrong_version_and_modified_index_fail_closed (test_graph_pipeline.GraphContracts.test_wrong_version_and_modified_index_fail_closed) ... ok
+ERROR StatusLogger Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:253)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:245)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:47)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:176)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:666)
+	at org.apache.logging.log4j.LogManager.getRootLogger(LogManager.java:700)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:129)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 20 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.setConfigLocation(LoggerContext.java:679)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:139)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.spark.internal.Logging$.uninitialize(Logging.scala:220)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:972)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/25 01:21:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/25 01:21:35 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: 0d:22:59:c4:36:f3:95:d0
+test_invalid_ids_rejected_and_duplicate_events_do_not_inflate (test_graph_pipeline.GraphSparkTests.test_invalid_ids_rejected_and_duplicate_events_do_not_inflate) ... 
+[Stage 0:>                                                          (0 + 0) / 4]
+
+[Stage 0:>                                                          (0 + 2) / 4]
+
+[Stage 0:=============================>                             (2 + 2) / 4]
+
+                                                                                
+ok
+test_relations_conditional_support_ties_and_gap (test_graph_pipeline.GraphSparkTests.test_relations_conditional_support_ties_and_gap) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 39630), raddr=('127.0.0.1', 38895)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 52288), raddr=('127.0.0.1', 34545)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_session_cohort_contains_only_past_and_all_novel_remaining_labels (test_graph_pipeline.GraphSparkTests.test_session_cohort_contains_only_past_and_all_novel_remaining_labels) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 49058), raddr=('127.0.0.1', 39423)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_dag_schedule_dependencies_and_http_graph_contract (test_graph_pipeline.SchedulerContracts.test_dag_schedule_dependencies_and_http_graph_contract) ... ok
+test_worker_forbids_other_algorithms (test_graph_pipeline.SchedulerContracts.test_worker_forbids_other_algorithms) ... ok
+test_worker_records_graph_version_and_rejects_non_graph_result (test_graph_pipeline.SchedulerContracts.test_worker_records_graph_version_and_rejects_non_graph_result) ... ok
+----------------------------------------------------------------------
+Ran 13 tests in 36.758s
+
+OK
+
+Running test_hybrid.py in an isolated Python/JVM process
+test_cold_user_gets_popularity_even_when_als_weight_is_one (test_hybrid.FusionTests.test_cold_user_gets_popularity_even_when_als_weight_is_one) ... ok
+test_invalid_weight_is_rejected (test_hybrid.FusionTests.test_invalid_weight_is_rejected) ... ok
+test_metrics_retain_cold_users_and_precision_denominator (test_hybrid.FusionTests.test_metrics_retain_cold_users_and_precision_denominator) ... ok
+test_rrf_rewards_agreement_and_never_reintroduces_seen (test_hybrid.FusionTests.test_rrf_rewards_agreement_and_never_reintroduces_seen) ... ok
+test_zero_weight_reproduces_unseen_popularity_without_duplicates (test_hybrid.FusionTests.test_zero_weight_reproduces_unseen_popularity_without_duplicates) ... ok
+ERROR StatusLogger Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:253)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:245)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:47)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:176)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:666)
+	at org.apache.logging.log4j.LogManager.getRootLogger(LogManager.java:700)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:129)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 20 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.setConfigLocation(LoggerContext.java:679)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:139)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.spark.internal.Logging$.uninitialize(Logging.scala:220)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:972)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/25 01:22:07 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/25 01:22:08 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: 4d:67:ba:71:f3:ed:f4:bb
+test_cohort_excludes_repeats_and_keeps_new_users (test_hybrid.TemporalPopularityTests.test_cohort_excludes_repeats_and_keeps_new_users) ... 
+[Stage 0:>                                                          (0 + 2) / 2]
+
+[Stage 0:>                  (0 + 2) / 2][Stage 1:>                  (0 + 0) / 2]
+
+[Stage 0:=========>         (1 + 1) / 2][Stage 1:>                  (0 + 2) / 2]
+
+                                                                                
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 50832), raddr=('127.0.0.1', 43947)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 59394), raddr=('127.0.0.1', 43641)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_popularity_excludes_future_and_counts_visitors_once (test_hybrid.TemporalPopularityTests.test_popularity_excludes_future_and_counts_visitors_once) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 33442), raddr=('127.0.0.1', 45401)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+----------------------------------------------------------------------
+Ran 7 tests in 23.363s
+
+OK
+
+Running test_lineage.py in an isolated Python/JVM process
+test_cycle_is_rejected (test_lineage.DataLineageTests.test_cycle_is_rejected) ... ok
+test_explicit_canonical_data_source (test_lineage.DataLineageTests.test_explicit_canonical_data_source) ... ok
+test_identity_mismatch_is_rejected (test_lineage.DataLineageTests.test_identity_mismatch_is_rejected) ... ok
+test_ingestion_run_and_legacy_missing_report (test_lineage.DataLineageTests.test_ingestion_run_and_legacy_missing_report) ... ok
+test_malformed_source_and_path_escape_are_rejected (test_lineage.DataLineageTests.test_malformed_source_and_path_escape_are_rejected) ... ok
+test_multiple_model_generations_keep_live_data_source (test_lineage.DataLineageTests.test_multiple_model_generations_keep_live_data_source) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.044s
+
+OK
+
+Running test_neighborhood.py in an isolated Python/JVM process
+test_balanced_validation_selection_does_not_reward_one_metric_only (test_neighborhood.NeighborhoodContractTests.test_balanced_validation_selection_does_not_reward_one_metric_only) ... ok
+test_metrics_preserve_cold_and_macro_denominator (test_neighborhood.NeighborhoodContractTests.test_metrics_preserve_cold_and_macro_denominator) ... ok
+test_no_personal_history_falls_back_with_zero_pop_weight (test_neighborhood.NeighborhoodContractTests.test_no_personal_history_falls_back_with_zero_pop_weight) ... ok
+test_seen_removed_duplicates_and_exact_k_fill (test_neighborhood.NeighborhoodContractTests.test_seen_removed_duplicates_and_exact_k_fill) ... ok
+ERROR StatusLogger Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:253)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:245)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:47)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:176)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:666)
+	at org.apache.logging.log4j.LogManager.getRootLogger(LogManager.java:700)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:129)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 20 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.setConfigLocation(LoggerContext.java:679)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:139)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.spark.internal.Logging$.uninitialize(Logging.scala:220)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:972)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/25 01:22:30 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/25 01:22:31 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: cb:f4:6a:89:dc:0f:a6:64
+test_other_users_cooccurrence_learned_without_future_or_self_edges (test_neighborhood.NeighborhoodSparkTests.test_other_users_cooccurrence_learned_without_future_or_self_edges) ... 
+[Stage 0:>                                                          (0 + 2) / 2]
+
+                                                                                
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 55490), raddr=('127.0.0.1', 42727)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+NEIGHBORS cosine-min1: 1 users, 2 fitted targeted edges
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 56032), raddr=('127.0.0.1', 34045)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 58662), raddr=('127.0.0.1', 33261)>
+NEIGHBORS jaccard-min2: 1 users, 2 fitted targeted edges
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_secondary_is_disjoint_and_keeps_novelty_rule (test_neighborhood.NeighborhoodSparkTests.test_secondary_is_disjoint_and_keeps_novelty_rule) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 48532), raddr=('127.0.0.1', 42607)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 59110), raddr=('127.0.0.1', 46175)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 46264), raddr=('127.0.0.1', 34181)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 45902), raddr=('127.0.0.1', 40297)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+----------------------------------------------------------------------
+Ran 6 tests in 29.221s
+
+OK
+
+Running test_phase2.py in an isolated Python/JVM process
+test_all_four_topics_and_raw_names_are_preserved (test_phase2.ContractTests.test_all_four_topics_and_raw_names_are_preserved) ... ok
+test_blank_transaction_normalizes_to_json_null (test_phase2.ContractTests.test_blank_transaction_normalizes_to_json_null) ... ok
+test_hash_matches_documented_canonical_five_field_array (test_phase2.ContractTests.test_hash_matches_documented_canonical_five_field_array) ... ok
+test_missing_columns_and_blank_run_rejected (test_phase2.ContractTests.test_missing_columns_and_blank_run_rejected) ... ok
+test_replay_identity_independent_of_run_and_ingestion (test_phase2.ContractTests.test_replay_identity_independent_of_run_and_ingestion) ... ok
+test_synthetic_review_is_explicit_and_unicode_serializes (test_phase2.ContractTests.test_synthetic_review_is_explicit_and_unicode_serializes) ... ok
+test_unknown_event_and_invalid_ids_rejected (test_phase2.ContractTests.test_unknown_event_and_invalid_ids_rejected) ... ok
+test_wire_integer_schema_and_timezone_enforced (test_phase2.ContractTests.test_wire_integer_schema_and_timezone_enforced) ... ok
+test_wrong_topic_and_tampered_hash_rejected (test_phase2.ContractTests.test_wrong_topic_and_tampered_hash_rejected) ... ok
+test_ack_failure_propagates_with_partial_metrics (test_phase2.ProducerTests.test_ack_failure_propagates_with_partial_metrics) ... ok
+test_bad_csv_emits_failure_report_and_nonzero_exit (test_phase2.ProducerTests.test_bad_csv_emits_failure_report_and_nonzero_exit) ... ok
+test_bounded_pending_and_acknowledgement_counts (test_phase2.ProducerTests.test_bounded_pending_and_acknowledgement_counts) ... ok
+test_dry_run_writes_jsonl_and_metrics_without_kafka (test_phase2.ProducerTests.test_dry_run_writes_jsonl_and_metrics_without_kafka) ... ok
+test_empty_input_does_not_report_success (test_phase2.ProducerTests.test_empty_input_does_not_report_success) ... ok
+test_fixture_contains_eight_labeled_rows_and_four_topics (test_phase2.ProducerTests.test_fixture_contains_eight_labeled_rows_and_four_topics) ... ok
+test_timestamp_pacing_rejects_unsorted_input (test_phase2.ProducerTests.test_timestamp_pacing_rejects_unsorted_input) ... ok
+test_verifier_checks_scope_topic_key_and_contract (test_phase2.VerificationTests.test_verifier_checks_scope_topic_key_and_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.028s
+
+OK
+
+Running test_phase3_streaming.py in an isolated Python/JVM process
+ERROR StatusLogger Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:253)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:245)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:47)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:176)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:666)
+	at org.apache.logging.log4j.LogManager.getRootLogger(LogManager.java:700)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:129)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 20 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.setConfigLocation(LoggerContext.java:679)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:139)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.spark.internal.Logging$.uninitialize(Logging.scala:220)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:972)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/25 01:23:01 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/25 01:23:02 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: 8d:aa:38:2e:be:93:ed:7c
+test_batch_window_session_features_and_boundaries (test_phase3_streaming.Phase3SparkTests.test_batch_window_session_features_and_boundaries) ... 26/10/25 01:23:10 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+
+[Stage 0:>                                                          (0 + 2) / 2]
+
+                                                                                
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 35148), raddr=('127.0.0.1', 36137)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+[Stage 5:>                                                          (0 + 1) / 1]
+
+                                                                                
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 48888), raddr=('127.0.0.1', 42703)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_parse_validation_and_exact_epoch_milliseconds (test_phase3_streaming.Phase3SparkTests.test_parse_validation_and_exact_epoch_milliseconds) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 54536), raddr=('127.0.0.1', 45685)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 36736), raddr=('127.0.0.1', 33567)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_streaming_dedup_lateness_features_and_checkpoint_restart (test_phase3_streaming.Phase3SparkTests.test_streaming_dedup_lateness_features_and_checkpoint_restart) ... 26/10/25 01:23:22 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/25 01:23:22 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+
+[Stage 11:>                                                         (0 + 1) / 1]
+
+[Stage 11:>                 (0 + 1) / 1][Stage 13:>                 (0 + 1) / 2]
+
+                                                                                
+26/10/25 01:23:25 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 2165 milliseconds
+26/10/25 01:23:25 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 2430 milliseconds
+26/10/25 01:23:25 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 600 milliseconds
+26/10/25 01:23:27 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1034 milliseconds
+26/10/25 01:23:27 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1196 milliseconds
+26/10/25 01:23:27 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 785 milliseconds
+26/10/25 01:23:28 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 934 milliseconds
+26/10/25 01:23:28 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 596 milliseconds
+26/10/25 01:23:29 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 893 milliseconds
+26/10/25 01:23:29 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1057 milliseconds
+26/10/25 01:23:31 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/25 01:23:31 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/25 01:23:32 WARN HDFSBackedStateStoreProvider: The state for version 6 doesn't exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
+26/10/25 01:23:32 WARN HDFSBackedStateStoreProvider: The state for version 6 doesn't exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
+26/10/25 01:23:32 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 985 milliseconds
+26/10/25 01:23:33 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1099 milliseconds
+26/10/25 01:23:33 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 573 milliseconds
+26/10/25 01:23:34 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/25 01:23:35 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+
+[Stage 52:>                                                         (0 + 2) / 2]
+
+[Stage 52:>                 (0 + 2) / 2][Stage 53:>                 (0 + 0) / 2]
+
+                                                                                
+26/10/25 01:23:37 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 2462 milliseconds
+
+[Stage 54:>                                                         (0 + 2) / 2]
+
+                                                                                
+26/10/25 01:23:38 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 2858 milliseconds
+26/10/25 01:23:38 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1210 milliseconds
+26/10/25 01:23:39 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1069 milliseconds
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 43742), raddr=('127.0.0.1', 36219)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 39226), raddr=('127.0.0.1', 35631)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+26/10/25 01:23:40 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/25 01:23:41 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 51766), raddr=('127.0.0.1', 33301)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+----------------------------------------------------------------------
+Ran 3 tests in 50.737s
+
+OK
+
+Running test_service.py in an isolated Python/JVM process
+test_atomic_version_reload_ignores_old_cache (test_service.ServiceTests.test_atomic_version_reload_ignores_old_cache) ... ok
+test_cache_hit_rechecks_live_seen_history (test_service.ServiceTests.test_cache_hit_rechecks_live_seen_history) ... ok
+test_cache_payload_version_mismatch_is_ignored (test_service.ServiceTests.test_cache_payload_version_mismatch_is_ignored) ... ok
+test_hybrid_and_popularity_sources_survive_cache_and_filter_seen (test_service.ServiceTests.test_hybrid_and_popularity_sources_survive_cache_and_filter_seen) ... ok
+test_invalid_lineage_fails_closed_without_unrelated_history (test_service.ServiceTests.test_invalid_lineage_fails_closed_without_unrelated_history) ... ok
+test_invalid_schema_rejected_without_fake_ready (test_service.ServiceTests.test_invalid_schema_rejected_without_fake_ready) ... ok
+test_metrics_users_and_local_dashboard (test_service.ServiceTests.test_metrics_users_and_local_dashboard) ... ok
+test_not_ready_until_usable_bundle_and_liveness_independent (test_service.ServiceTests.test_not_ready_until_usable_bundle_and_liveness_independent) ... ok
+test_optional_redis_failure_falls_back_with_explicit_warning (test_service.ServiceTests.test_optional_redis_failure_falls_back_with_explicit_warning) ... ok
+test_personalized_seen_filter_and_popularity_fill (test_service.ServiceTests.test_personalized_seen_filter_and_popularity_fill) ... ok
+test_pointer_and_sidecar_path_traversal_rejected (test_service.ServiceTests.test_pointer_and_sidecar_path_traversal_rejected) ... ok
+test_pointer_switch_never_leaks_previous_run (test_service.ServiceTests.test_pointer_switch_never_leaks_previous_run) ... ok
+test_retrained_model_filters_canonical_data_history_even_on_cache_hit (test_service.ServiceTests.test_retrained_model_filters_canonical_data_history_even_on_cache_hit) ... ok
+test_same_run_failed_reload_retains_traceable_last_valid (test_service.ServiceTests.test_same_run_failed_reload_retains_traceable_last_valid) ... ok
+test_sqlite_filters_omitted_user_and_is_required_when_declared (test_service.ServiceTests.test_sqlite_filters_omitted_user_and_is_required_when_declared) ... ok
+test_strict_id_and_k_bounds (test_service.ServiceTests.test_strict_id_and_k_bounds) ... ok
+test_unknown_user_uses_explicit_popular_fallback (test_service.ServiceTests.test_unknown_user_uses_explicit_popular_fallback) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.807s
+
+OK
+
+Running test_session_audit.py in an isolated Python/JVM process
+test_canonical_hash_ignores_prediction_and_row_order_only (test_session_audit.SessionAuditTests.test_canonical_hash_ignores_prediction_and_row_order_only) ... ok
+test_duplicates_seen_targets_and_missing_shared_context_rejected (test_session_audit.SessionAuditTests.test_duplicates_seen_targets_and_missing_shared_context_rejected) ... ok
+test_full_audit_preserves_protocols_and_reference (test_session_audit.SessionAuditTests.test_full_audit_preserves_protocols_and_reference) ... ok
+test_future_context_and_equal_target_time_are_rejected (test_session_audit.SessionAuditTests.test_future_context_and_equal_target_time_are_rejected) ... ok
+test_graph_cutoff_must_precede_inference_time (test_session_audit.SessionAuditTests.test_graph_cutoff_must_precede_inference_time) ... ok
+test_late_plan_and_early_evaluation_rejected (test_session_audit.SessionAuditTests.test_late_plan_and_early_evaluation_rejected) ... ok
+test_macro_denominator_keeps_misses_and_all_three_models (test_session_audit.SessionAuditTests.test_macro_denominator_keeps_misses_and_all_three_models) ... ok
+test_policy_changes_after_freeze_rejected (test_session_audit.SessionAuditTests.test_policy_changes_after_freeze_rejected) ... ok
+test_promotion_requires_improvement_on_every_validation_metric (test_session_audit.SessionAuditTests.test_promotion_requires_improvement_on_every_validation_metric) ... ok
+test_query_id_collision_rejected (test_session_audit.SessionAuditTests.test_query_id_collision_rejected) ... ok
+test_session_requires_one_target_and_past_context (test_session_audit.SessionAuditTests.test_session_requires_one_target_and_past_context) ... ok
+test_static_macro_recall_is_not_session_recall (test_session_audit.SessionAuditTests.test_static_macro_recall_is_not_session_recall) ... ok
+test_static_reference_changes_cannot_hide_behind_new_cohort_hash (test_session_audit.SessionAuditTests.test_static_reference_changes_cannot_hide_behind_new_cohort_hash) ... ok
+test_validation_cannot_use_later_than_final_training_period (test_session_audit.SessionAuditTests.test_validation_cannot_use_later_than_final_training_period) ... ok
+test_validation_mean_tampering_rejected (test_session_audit.SessionAuditTests.test_validation_mean_tampering_rejected) ... ok
+test_winner_must_follow_ndcg_then_recall_precision_name_rule (test_session_audit.SessionAuditTests.test_winner_must_follow_ndcg_then_recall_precision_name_rule) ... ok
+test_wrong_metric_or_hash_is_rejected (test_session_audit.SessionAuditTests.test_wrong_metric_or_hash_is_rejected) ... ok
+test_zero_hits_and_regression_are_valid_outcomes (test_session_audit.SessionAuditTests.test_zero_hits_and_regression_are_valid_outcomes) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.175s
+
+OK
+
+Running test_session_gate.py in an isolated Python/JVM process
+test_equal_hit_totals_with_roundoff_are_not_improvement (test_session_gate.SessionGateTests.test_equal_hit_totals_with_roundoff_are_not_improvement) ... ok
+test_every_metric_must_improve (test_session_gate.SessionGateTests.test_every_metric_must_improve) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+
+Running test_session_model.py in an isolated Python/JVM process
+test_cart_and_purchase_intent_change_candidate_order (test_session_model.SessionModelTests.test_cart_and_purchase_intent_change_candidate_order) ... ok
+test_duplicate_events_do_not_accumulate_unbounded_strength (test_session_model.SessionModelTests.test_duplicate_events_do_not_accumulate_unbounded_strength) ... ok
+test_future_events_are_rejected_in_both_inference_entry_points (test_session_model.SessionModelTests.test_future_events_are_rejected_in_both_inference_entry_points) ... ok
+test_same_item_uses_max_event_strength_and_latest_timestamp (test_session_model.SessionModelTests.test_same_item_uses_max_event_strength_and_latest_timestamp) ... ok
+test_seed_limit_uses_latest_distinct_items_with_deterministic_ties (test_session_model.SessionModelTests.test_seed_limit_uses_latest_distinct_items_with_deterministic_ties) ... ok
+test_seen_filter_covers_context_and_explicit_history_and_fallback (test_session_model.SessionModelTests.test_seen_filter_covers_context_and_explicit_history_and_fallback) ... ok
+test_sqlite_http_helper_matches_in_memory_offline_ranker (test_session_model.SessionModelTests.test_sqlite_http_helper_matches_in_memory_offline_ranker) ... ok
+test_time_decay_changes_rank_with_no_position_or_intent_change (test_session_model.SessionModelTests.test_time_decay_changes_rank_with_no_position_or_intent_change) ... ok
+test_unmatched_context_falls_back_without_seen_or_duplicate_items (test_session_model.SessionModelTests.test_unmatched_context_falls_back_without_seen_or_duplicate_items) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.054s
+
+OK
+
+Running test_session_multilabel.py in an isolated Python/JVM process
+test_existing_next_item_must_remain_in_future_labels (test_session_multilabel.MultiLabelSessionTests.test_existing_next_item_must_remain_in_future_labels) ... ok
+test_future_labels_include_same_time_targets_and_later_new_items (test_session_multilabel.MultiLabelSessionTests.test_future_labels_include_same_time_targets_and_later_new_items) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+
+Running test_session_service.py in an isolated Python/JVM process
+test_context_and_known_user_history_are_both_excluded (test_session_service.SessionServiceTests.test_context_and_known_user_history_are_both_excluded) ... ok
+test_contexts_are_independent_and_empty_context_is_explicit_fallback (test_session_service.SessionServiceTests.test_contexts_are_independent_and_empty_context_is_explicit_fallback) ... ok
+test_http_roundtrip_uses_real_graph_and_distinct_versions (test_session_service.SessionServiceTests.test_http_roundtrip_uses_real_graph_and_distinct_versions) ... ok
+test_malformed_schema_and_traversal_refused (test_session_service.SessionServiceTests.test_malformed_schema_and_traversal_refused) ... ok
+test_metrics_are_separate_and_do_not_overwrite_static_evaluation (test_session_service.SessionServiceTests.test_metrics_are_separate_and_do_not_overwrite_static_evaluation) ... ok
+test_missing_index_refuses_session_but_keeps_static_model_available (test_session_service.SessionServiceTests.test_missing_index_refuses_session_but_keeps_static_model_available) ... ok
+test_old_bundle_without_session_is_still_servable (test_session_service.SessionServiceTests.test_old_bundle_without_session_is_still_servable) ... ok
+test_omitted_timestamp_uses_server_clock_and_event_types_are_supported (test_session_service.SessionServiceTests.test_omitted_timestamp_uses_server_clock_and_event_types_are_supported) ... ok
+test_rejects_future_invalid_and_unbounded_payloads (test_session_service.SessionServiceTests.test_rejects_future_invalid_and_unbounded_payloads) ... ok
+test_session_filters_full_sqlite_history_for_user_outside_exported_cache (test_session_service.SessionServiceTests.test_session_filters_full_sqlite_history_for_user_outside_exported_cache) ... ok
+test_session_reads_canonical_online_history_without_cross_run_leakage (test_session_service.SessionServiceTests.test_session_reads_canonical_online_history_without_cross_run_leakage) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.191s
+
+OK
+
+Running test_session_training.py in an isolated Python/JVM process
+test_cold_catalog_targets_are_retained (test_session_training.SessionCohortTests.test_cold_catalog_targets_are_retained) ... ok
+test_coverage_reports_sessions_without_eligible_context_and_target (test_session_training.SessionCohortTests.test_coverage_reports_sessions_without_eligible_context_and_target) ... ok
+test_first_new_target_skips_repeats_and_excludes_later_events (test_session_training.SessionCohortTests.test_first_new_target_skips_repeats_and_excludes_later_events) ... ok
+test_period_end_and_global_cutoff_are_respected (test_session_training.SessionCohortTests.test_period_end_and_global_cutoff_are_respected) ... ok
+test_sampling_uses_session_keys_and_is_independent_of_input_order_and_target_ids (test_session_training.SessionCohortTests.test_sampling_uses_session_keys_and_is_independent_of_input_order_and_target_ids) ... ok
+test_simultaneous_events_are_never_each_others_past_context (test_session_training.SessionCohortTests.test_simultaneous_events_are_never_each_others_past_context) ... ok
+test_thirty_minute_gap_is_inclusive_and_larger_gap_starts_new_context (test_session_training.SessionCohortTests.test_thirty_minute_gap_is_inclusive_and_larger_gap_starts_new_context) ... ok
+FIT {"graph": "binary_user", "train_end_inclusive": 30, "input_events": 24, "entity_item_pairs_before_cap": 24, "entity_item_pairs_after_cap": 22, "entities": 2, "catalog_items": 22, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+test_binary_graph_caps_latest_twenty_distinct_pairs_per_visitor (test_session_training.SparseTrainingTests.test_binary_graph_caps_latest_twenty_distinct_pairs_per_visitor) ... ok
+FIT {"graph": "binary_user", "train_end_inclusive": 10, "input_events": 7, "entity_item_pairs_before_cap": 7, "entity_item_pairs_after_cap": 7, "entities": 4, "catalog_items": 3, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+test_binary_graph_matches_exact_jaccard_shrinkage_counts (test_session_training.SparseTrainingTests.test_binary_graph_matches_exact_jaccard_shrinkage_counts) ... ok
+FIT {"graph": "binary_user", "train_end_inclusive": 100, "input_events": 21, "entity_item_pairs_before_cap": 21, "entity_item_pairs_after_cap": 20, "entities": 1, "catalog_items": 20, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+test_cap_breaks_equal_timestamp_ties_by_ascending_item_id (test_session_training.SparseTrainingTests.test_cap_breaks_equal_timestamp_ties_by_ascending_item_id) ... ok
+FIT {"graph": "binary_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "binary_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_session", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_session", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+test_future_events_do_not_change_any_graph_or_catalog (test_session_training.SparseTrainingTests.test_future_events_do_not_change_any_graph_or_catalog) ... ok
+FIT {"graph": "weighted_user", "train_end_inclusive": 3000000, "input_events": 4, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 1, "catalog_items": 4, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_session", "train_end_inclusive": 3000000, "input_events": 4, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 2, "catalog_items": 4, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+test_session_graph_does_not_link_items_across_separate_sessions (test_session_training.SparseTrainingTests.test_session_graph_does_not_link_items_across_separate_sessions) ... ok
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 2, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 105, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 2, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+test_weighted_graph_uses_maximum_decayed_intent_not_event_sum (test_session_training.SparseTrainingTests.test_weighted_graph_uses_maximum_decayed_intent_not_event_sum) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.469s
+
+OK
+
+Running test_session_transition.py in an isolated Python/JVM process
+test_continuation_graph_uses_only_strictly_later_new_items (test_session_transition.TransitionTests.test_continuation_graph_uses_only_strictly_later_new_items) ... ok
+test_sqlite_inference_matches_offline_fusion_and_filters_seen (test_session_transition.TransitionTests.test_sqlite_inference_matches_offline_fusion_and_filters_seen) ... ok
+test_strength_sqlite_inference_matches_offline_and_filters_seen (test_session_transition.TransitionTests.test_strength_sqlite_inference_matches_offline_and_filters_seen) ... ok
+test_training_uses_only_prior_timestamp_groups_and_new_items (test_session_transition.TransitionTests.test_training_uses_only_prior_timestamp_groups_and_new_items) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.102s
+
+OK
+
+Running test_sort_events.py in an isolated Python/JVM process
+test_atomic_commit_race_does_not_clobber_competing_file (test_sort_events.SortEventsTests.test_atomic_commit_race_does_not_clobber_competing_file) ... ok
+test_empty_csv_with_valid_header_outputs_header_only (test_sort_events.SortEventsTests.test_empty_csv_with_valid_header_outputs_header_only) ... ok
+test_equal_timestamps_stable_across_multiple_merge_passes (test_sort_events.SortEventsTests.test_equal_timestamps_stable_across_multiple_merge_passes) ... ok
+test_existing_output_and_input_overwrite_are_rejected (test_sort_events.SortEventsTests.test_existing_output_and_input_overwrite_are_rejected) ... ok
+test_invalid_timestamp_or_header_leaves_no_output (test_sort_events.SortEventsTests.test_invalid_timestamp_or_header_leaves_no_output) ... ok
+test_sort_across_chunks_preserves_every_raw_field (test_sort_events.SortEventsTests.test_sort_across_chunks_preserves_every_raw_field) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.158s
+
+OK
+
+Running test_storage.py in an isolated Python/JVM process
+test_build_retry_and_actual_acid_time_travel (test_storage.DeltaIntegrationTests.test_build_retry_and_actual_acid_time_travel) ... skipped 'Set RUN_DELTA_TESTS=1 in the Java/Delta runtime'
+test_real_mongo_redis_retry_session_bridge_and_seen_set (test_storage.OnlineIntegrationTests.test_real_mongo_redis_retry_session_bridge_and_seen_set) ... skipped 'Set RUN_ONLINE_TESTS=1 with MongoDB/Redis running'
+test_dedup_order_window_and_late_session_bridge (test_storage.ProjectionTests.test_dedup_order_window_and_late_session_bridge) ... ok
+test_retry_replaces_projections_removes_stale_sessions_and_isolates_runs (test_storage.ProjectionTests.test_retry_replaces_projections_removes_stale_sessions_and_isolates_runs) ... ok
+test_utc_milliseconds_and_missing_metrics (test_storage.ProjectionTests.test_utc_milliseconds_and_missing_metrics) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+OK (skipped=2)
+
+Running test_training.py in an isolated Python/JVM process
+test_chronological_splits_precede_validation_and_keep_equal_times_together (test_training.RankingTests.test_chronological_splits_precede_validation_and_keep_equal_times_together) ... ok
+test_known_binary_ranking_values_and_fixed_precision_denominator (test_training.RankingTests.test_known_binary_ranking_values_and_fixed_precision_denominator) ... ok
+test_missing_cold_predictions_are_misses_and_duplicate_ids_do_not_inflate (test_training.RankingTests.test_missing_cold_predictions_are_misses_and_duplicate_ids_do_not_inflate) ... ok
+test_quick_grid_really_selects_multiple_candidates_and_full_grid_tunes_alpha (test_training.RankingTests.test_quick_grid_really_selects_multiple_candidates_and_full_grid_tunes_alpha) ... ok
+test_seen_filter_is_unique_score_ordered_and_deterministic (test_training.RankingTests.test_seen_filter_is_unique_score_ordered_and_deterministic) ... ok
+test_sqlite_sidecar_contains_all_seen_users_beyond_json_scope (test_training.RankingTests.test_sqlite_sidecar_contains_all_seen_users_beyond_json_scope) ... ok
+ERROR StatusLogger Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:253)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:245)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:47)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:176)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:666)
+	at org.apache.logging.log4j.LogManager.getRootLogger(LogManager.java:700)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:129)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 20 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.setConfigLocation(LoggerContext.java:679)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:139)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 4485161a0ab5: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.spark.internal.Logging$.uninitialize(Logging.scala:220)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:972)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 4485161a0ab5: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/25 01:24:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/25 01:24:03 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: d5:6f:1a:0e:ba:2d:91:be
+test_real_als_pipeline_persists_and_filters_seen_items (test_training.SparkALSTests.test_real_als_pipeline_persists_and_filters_seen_items) ... 
+[Stage 0:>                                                          (0 + 2) / 2]
+
+                                                                                
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 37564), raddr=('127.0.0.1', 41781)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 36678), raddr=('127.0.0.1', 34693)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 60478), raddr=('127.0.0.1', 36887)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 51774), raddr=('127.0.0.1', 44197)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 53328), raddr=('127.0.0.1', 38355)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 34652), raddr=('127.0.0.1', 39575)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 56350), raddr=('127.0.0.1', 42491)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 47020), raddr=('127.0.0.1', 36389)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 51048), raddr=('127.0.0.1', 40693)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 35566), raddr=('127.0.0.1', 43927)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 35620), raddr=('127.0.0.1', 40191)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+[Stage 694:>                                                        (0 + 2) / 2]
+
+                                                                                
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 44144), raddr=('127.0.0.1', 38709)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+----------------------------------------------------------------------
+Ran 7 tests in 51.742s
+
+OK
+
+Module results: [('test_graph_pipeline.py', 0), ('test_hybrid.py', 0), ('test_lineage.py', 0), ('test_neighborhood.py', 0), ('test_phase2.py', 0), ('test_phase3_streaming.py', 0), ('test_service.py', 0), ('test_session_audit.py', 0), ('test_session_gate.py', 0), ('test_session_model.py', 0), ('test_session_multilabel.py', 0), ('test_session_service.py', 0), ('test_session_training.py', 0), ('test_session_transition.py', 0), ('test_sort_events.py', 0), ('test_storage.py', 0), ('test_training.py', 0)]

@@ -1,3 +1,5 @@
+> **Cập nhật Graph thống nhất:** nội dung bên dưới là hướng dẫn/lịch sử trước khi thống nhất Phase 5–6. Dùng [Runbook hiện hành](GRAPH_RUNBOOK.md) và [kiểm thử bản mới](GRAPH_VALIDATION.md). Không dùng số liệu cũ làm kết quả bản mới.
+
 # Huấn luyện full dữ liệu và cách hiểu metric
 
 Full data là đọc đủ 2.756.101 dòng events.csv, validate rồi dedup trước huấn luyện.

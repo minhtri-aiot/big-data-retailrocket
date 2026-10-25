@@ -1,0 +1,14 @@
+{
+  "raw_events": 2756101,
+  "clean_events": 2755641,
+  "users": 1407580,
+  "items": 235061,
+  "distinct_user_item_pairs": 2145179,
+  "observed_matrix_density": 6.483505297320101e-06,
+  "average_events_per_visitor": 1.9577153696415124,
+  "test_query_users": 4759,
+  "queries_from_users_absent_before_cutoff": 4213,
+  "cold_target_labels": 632,
+  "total_target_labels": 10279,
+  "query_id_sha256": "424f2cf7899e55139ac46647bc13c8ae38b689d4e15f527e1046275d2cccfccd"
+}

@@ -1,0 +1,12 @@
+{
+  "source_commit": "1f602e227af5f36257e9280de6eafe205f132f9a",
+  "model_family": "graph_session",
+  "graph_full_run": "graph-full-20261024",
+  "role_of_als": "optional baseline only",
+  "primary_artifact_sha256": {
+    "session_neighbors.sqlite": "f55c16fee1771d19e5b0f494fac00804e6151920cdd62ad02bf9ca1aa7347812",
+    "seen_items.sqlite": "52533bb42a178389d18b3a423f416d0c1fa4b3bcea6945b2cae2de13aedcc714"
+  },
+  "raw_csv_in_source_zip": false,
+  "full_graph_snapshot_in_source_zip": true
+}

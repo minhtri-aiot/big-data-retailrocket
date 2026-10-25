@@ -114,6 +114,23 @@ def create_app(settings: Settings | None = None, backends: Backends | None = Non
             warnings.extend(live_warnings)
         history_sources = list(dict.fromkeys(history_sources))
         warnings = list(dict.fromkeys(warnings))
+        if bundle["algorithm"] == "graph_session":
+            try:
+                from pipeline.session_model import score_context
+                context = store.recent_context(bundle, user)
+                scored = score_context(store.session_index(bundle), context, bundle["popular_items"], seen,
+                                       count, bundle["session_model"]["configuration"], int(time.time()*1000))
+            except (OSError, ValueError, sqlite3.Error) as error:
+                raise HTTPException(503, "Graph artifact is unavailable") from error
+            return {"run_id": run, "data_run_id": data_run, "model_version": version,
+                    "trained_at_utc": bundle["trained_at_utc"],
+                    "metric_model_version": bundle["metric_model_version"], "algorithm": "graph_session",
+                    "visitorid": user, "requested_k": count, "returned": len(scored["items"]),
+                    "items": scored["items"], "source": scored["source"], "cache_hit": False,
+                    "context_source": "phase5_snapshot_recent_items", "history_sources": history_sources,
+                    "history_runs": history_runs, "seen_items_excluded": len(seen), "warnings": warnings,
+                    "model_stale": status["stale"], "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "request_ms": round((time.perf_counter()-started)*1000, 3)}
         cached = online.cache_get(run, version, user, count)
         source = ({"als_popularity_hybrid":"hybrid_bundle", "popularity_recent":"popularity_bundle", "item_knn_hybrid":"neighborhood_bundle"}.get(bundle["algorithm"],"als_bundle") if str(user) in bundle["recommendations"] else "popular_fallback")
         candidates = bundle["recommendations"].get(str(user), [])
@@ -190,7 +207,7 @@ def create_app(settings: Settings | None = None, backends: Backends | None = Non
         return {"run_id": run, "data_run_id": data_run, "model_version": version,
                 "session_model_version": info.get("model_version", version + ":session"),
                 "metric_model_version": info.get("metric_model_version"),
-                "algorithm": "session_item_item", "visitorid": payload.visitorid,
+                "algorithm": "graph_session" if bundle["algorithm"] == "graph_session" else "session_item_item", "visitorid": payload.visitorid,
                 "requested_k": payload.k, "returned": len(items), "items": items,
                 "source": scored["source"], "context_events": len(events),
                 "context_items": scored["context_items"], "matched_seeds": scored["matched_seeds"],
@@ -228,10 +245,10 @@ def create_app(settings: Settings | None = None, backends: Backends | None = Non
     def users(limit: str = Query("20", description="Integer 1–200")):
         maximum = number(limit, "limit", 1, 200)
         bundle, _ = require_bundle()
-        values = sorted(int(value) for value in bundle["recommendations"])
+        values = bundle.get("sample_users", sorted(int(value) for value in bundle["recommendations"]))
         return {"run_id": bundle["run_id"], "model_version": bundle["model_version"],
                 "user_ids": values[:maximum], "total_exported_users": len(values),
-                "scope": "Users with exported personalized recommendations; others use popularity fallback"}
+                "scope": "Snapshot sample; Graph is scored on demand" if bundle["algorithm"] == "graph_session" else "Users with exported personalized recommendations; others use popularity fallback"}
 
     static = Path(__file__).parent / "static"
     application.mount("/static", StaticFiles(directory=static), name="static")

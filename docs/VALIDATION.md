@@ -1,3 +1,5 @@
+> **Cập nhật Graph thống nhất:** nội dung bên dưới là hướng dẫn/lịch sử trước khi thống nhất Phase 5–6. Dùng [Runbook hiện hành](GRAPH_RUNBOOK.md) và [kiểm thử bản mới](GRAPH_VALIDATION.md). Không dùng số liệu cũ làm kết quả bản mới.
+
 # Kết quả kiểm chứng thực tế
 
 Ngày chạy Docker có bằng chứng: **21/10/2026**; cập nhật phạm vi bản sửa nguồn

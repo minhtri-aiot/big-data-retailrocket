@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "kind": "jsdom DOM + live HTTP; no real-browser rendering",
+  "algorithm": "graph_session",
+  "model_version": "graph-graph-full-20261024-v1",
+  "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+  "checks": [
+    "4 metric cards",
+    "Graph identity",
+    "manual view updates context",
+    "add to cart",
+    "simulated purchase",
+    "seen filtering",
+    "reset session"
+  ],
+  "context_after_item": "PHIÊN NÀY · 1 TƯƠNG TÁCXem · Vở kẻ ngang Campus · 06ID 129960",
+  "errors": []
+}

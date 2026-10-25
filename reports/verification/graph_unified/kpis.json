@@ -1,0 +1,11 @@
+{
+  "run_id": "graph-full-20261024",
+  "silver_events": 2755641,
+  "visitors": 1407580,
+  "items": 235061,
+  "event_counts": {
+    "transaction": 22457,
+    "addtocart": 68966,
+    "view": 2664218
+  }
+}

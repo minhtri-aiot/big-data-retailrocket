@@ -1,0 +1,23 @@
+{
+  "url": "http://localhost:8002/",
+  "quality": "CHẤT LƯỢNG GỢI Ý THEO PHIÊN\nKết quả trên dữ liệu kiểm tra\n5.000 lượt dự đoán · Top 10\nPrecision@10\n01\n4.13%\n\nTrong 10 gợi ý, có bao nhiêu món trùng đáp án.\n\nMốc so sánh phổ biến: 0.07%\nRecall@10\n02\n28.23%\n\nTìm được bao nhiêu phần trong các món đúng cần gợi ý.\n\nMốc so sánh phổ biến: 0.43%\nNDCG@10\n03\n19.67%\n\nMón đúng càng nằm gần đầu danh sách, điểm càng cao.\n\nMốc so sánh phổ biến: 0.20%\nHitRate@10\n04\n34.46%\n\nTỷ lệ lượt dự đoán có ít nhất một món đúng.\n\nMốc so sánh phổ biến: 0.74%\n\nChấm các món mới còn lại trong cùng phiên. Số đánh giá cố định ở Top 10; chọn 5 hoặc 20 sản phẩm bên dưới không đổi báo cáo.\n\nSo sánh & cách chấm ↗",
+  "actions": [
+    "view 129960",
+    "addtocart 238677",
+    "transaction 320130"
+  ],
+  "sessionText": "GỢI Ý THAY ĐỔI THEO TƯƠNG TÁC\nDành cho bạn\n\nXem một sản phẩm hoặc thêm vào giỏ để khám phá gợi ý tiếp theo.\n\nBắt đầu lại\nPHIÊN NÀY · 3 TƯƠNG TÁC\nXem · Vở kẻ ngang Campus · 06ID 129960\n→\n+ Giỏ · Đồng hồ để bàn Round · 02ID 238677\n→\nMua thử · Laptop Aurora 14 · 02ID 320130\nTùy chỉnh gợi ý\n\nGợi ý theo hành vi trong phiên · 10 sản phẩm · đã lọc 3 món từng tương tác.\n\n#1\nMinh họa\n\nGIÀY\n\nGiày thể thao Move · 05\n716.000 ₫\nGiá minh họa\n\nItem ID · 313931\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#2\nMinh họa\n\nĐỒNG HỒ\n\nĐồng hồ để bàn Round · 06\n268.000 ₫\nGiá minh họa\n\nItem ID · 35403\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#3\nMinh họa\n\nĐỒNG HỒ\n\nĐồng hồ để bàn Round · 02\n274.000 ₫\nGiá minh họa\n\nItem ID · 122604\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#4\nMinh họa\n\nGIÀY\n\nGiày thể thao Move · 05\n751.000 ₫\nGiá minh họa\n\nItem ID · 389158\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#5\nMinh họa\n\nĐÈN\n\nĐèn bàn Halo · 03\n358.000 ₫\nGiá minh họa\n\nItem ID · 218746\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#6\nMinh họa\n\nTÚI & BALO\n\nTúi vải Canvas · 04\n164.000 ₫\nGiá minh họa\n\nItem ID · 37029\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#7\nMinh họa\n\nPHỤ KIỆN ĐIỆN THOẠI\n\nSạc dự phòng Pocket · 02\n549.000 ₫\nGiá minh họa\n\nItem ID · 257254\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#8\nMinh họa\n\nPHỤ KIỆN ĐIỆN THOẠI\n\nCủ sạc Compact · 05\n329.000 ₫\nGiá minh họa\n\nItem ID · 407489\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#9\nMinh họa\n\nBÌNH NƯỚC\n\nBình nước Nomad · 06\n183.000 ₫\nGiá minh họa\n\nItem ID · 108486\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n#10\nMinh họa\n\nNHÀ BẾP\n\nBếp điện đơn Cook · 04\n890.000 ₫\nGiá minh họa\n\nItem ID · 51650\n\nĐiểm xếp hạng\nXem\n+ Giỏ\nMua ngay\nMua mô phỏng · cập nhật gợi ý\n\nTương tác chỉ mô phỏng trong tab. Không tạo đơn hàng hay thay đổi kết quả đánh giá.\n\nThử bằng Item ID\nItem ID gốc\nHành vi\nXem sản phẩm\nThêm giỏ mô phỏng\nMua mô phỏng\nGhi nhận & cập nhật\nChi tiết yêu cầu gần nhất",
+  "top10": [
+    313931,
+    35403,
+    122604,
+    389158,
+    218746,
+    37029,
+    257254,
+    407489,
+    108486,
+    51650
+  ],
+  "seenExcluded": true
+}

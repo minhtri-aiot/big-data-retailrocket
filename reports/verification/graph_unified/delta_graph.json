@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "local Delta Silver v0 -> main Graph trainer -> validated API artifact",
+  "events": 100,
+  "algorithm": "graph_session",
+  "delta_version": 0,
+  "hdfs_kafka_airflow_exercised": false,
+  "dependencies": "Delta 3.3.3 jars preloaded from official Maven repository; Java resolver network unavailable"
+}

@@ -1,0 +1,123 @@
+test_cold_user_cold_item_and_empty_context_fallback (test_graph_pipeline.GraphContracts.test_cold_user_cold_item_and_empty_context_fallback) ... ok
+test_graph_primary_and_static_endpoint_use_same_scorer (test_graph_pipeline.GraphContracts.test_graph_primary_and_static_endpoint_use_same_scorer) ... ok
+test_hitrate_is_not_multilabel_recall (test_graph_pipeline.GraphContracts.test_hitrate_is_not_multilabel_recall) ... ok
+test_invalid_future_and_duplicate_context (test_graph_pipeline.GraphContracts.test_invalid_future_and_duplicate_context) ... ok
+test_malformed_graph_configuration_is_not_ready (test_graph_pipeline.GraphContracts.test_malformed_graph_configuration_is_not_ready) ... ok
+test_runtime_refuses_legacy_als (test_graph_pipeline.GraphContracts.test_runtime_refuses_legacy_als) ... ok
+test_wrong_version_and_modified_index_fail_closed (test_graph_pipeline.GraphContracts.test_wrong_version_and_modified_index_fail_closed) ... ok
+ERROR StatusLogger Could not determine local host name
+ java.net.UnknownHostException: 2271b4c1dd1f: 2271b4c1dd1f: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:253)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:245)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:47)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:176)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:666)
+	at org.apache.logging.log4j.LogManager.getRootLogger(LogManager.java:700)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:129)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 2271b4c1dd1f: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 20 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 2271b4c1dd1f: 2271b4c1dd1f: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.setConfigLocation(LoggerContext.java:679)
+	at org.apache.spark.internal.Logging.initializeLogging(Logging.scala:139)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary(Logging.scala:114)
+	at org.apache.spark.internal.Logging.initializeLogIfNecessary$(Logging.scala:108)
+	at org.apache.spark.deploy.SparkSubmit.initializeLogIfNecessary(SparkSubmit.scala:76)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:84)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 2271b4c1dd1f: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+ERROR StatusConsoleListener Could not determine local host name
+ java.net.UnknownHostException: 2271b4c1dd1f: 2271b4c1dd1f: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1671)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:615)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:615)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:694)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:711)
+	at org.apache.spark.internal.Logging$.uninitialize(Logging.scala:220)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:972)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:199)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:222)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1125)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1134)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: 2271b4c1dd1f: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:934)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:852)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1666)
+	... 14 more
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/25 01:23:37 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/25 01:23:38 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: 4e:c5:1e:03:c1:f8:a9:3f
+test_invalid_ids_rejected_and_duplicate_events_do_not_inflate (test_graph_pipeline.GraphSparkTests.test_invalid_ids_rejected_and_duplicate_events_do_not_inflate) ... 
+[Stage 0:>                                                          (0 + 2) / 4]
+
+[Stage 0:=============================>                             (2 + 2) / 4]
+
+                                                                                
+
+[Stage 3:=============================>                             (2 + 2) / 4]
+
+                                                                                
+ok
+test_missing_event_is_rejected_instead_of_silently_dropped (test_graph_pipeline.GraphSparkTests.test_missing_event_is_rejected_instead_of_silently_dropped) ... ok
+test_relations_conditional_support_ties_and_gap (test_graph_pipeline.GraphSparkTests.test_relations_conditional_support_ties_and_gap) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 56488), raddr=('127.0.0.1', 44743)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 52198), raddr=('127.0.0.1', 44165)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_session_cohort_contains_only_past_and_all_novel_remaining_labels (test_graph_pipeline.GraphSparkTests.test_session_cohort_contains_only_past_and_all_novel_remaining_labels) ... /usr/local/lib/python3.11/socket.py:789: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 47188), raddr=('127.0.0.1', 34539)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_dag_schedule_dependencies_and_http_graph_contract (test_graph_pipeline.SchedulerContracts.test_dag_schedule_dependencies_and_http_graph_contract) ... ok
+test_worker_forbids_other_algorithms (test_graph_pipeline.SchedulerContracts.test_worker_forbids_other_algorithms) ... ok
+test_worker_records_graph_version_and_rejects_non_graph_result (test_graph_pipeline.SchedulerContracts.test_worker_records_graph_version_and_rejects_non_graph_result) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 37.883s
+
+OK

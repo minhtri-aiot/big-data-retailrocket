@@ -1,0 +1,425 @@
+
+Running test_graph_pipeline.py in an isolated Python/JVM process
+test_cold_user_cold_item_and_empty_context_fallback (test_graph_pipeline.GraphContracts.test_cold_user_cold_item_and_empty_context_fallback) ... ok
+test_graph_primary_and_static_endpoint_use_same_scorer (test_graph_pipeline.GraphContracts.test_graph_primary_and_static_endpoint_use_same_scorer) ... ok
+test_hitrate_is_not_multilabel_recall (test_graph_pipeline.GraphContracts.test_hitrate_is_not_multilabel_recall) ... ok
+test_invalid_future_and_duplicate_context (test_graph_pipeline.GraphContracts.test_invalid_future_and_duplicate_context) ... ok
+test_runtime_refuses_legacy_als (test_graph_pipeline.GraphContracts.test_runtime_refuses_legacy_als) ... ok
+test_wrong_version_and_modified_index_fail_closed (test_graph_pipeline.GraphContracts.test_wrong_version_and_modified_index_fail_closed) ... ok
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/24 21:40:11 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/24 21:40:12 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: e4:c9:9d:7c:45:b2:30:1a
+test_invalid_ids_rejected_and_duplicate_events_do_not_inflate (test_graph_pipeline.GraphSparkTests.test_invalid_ids_rejected_and_duplicate_events_do_not_inflate) ... [Stage 0:>                                                          (0 + 2) / 4]                                                                                ok
+test_relations_conditional_support_ties_and_gap (test_graph_pipeline.GraphSparkTests.test_relations_conditional_support_ties_and_gap) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 59490), raddr=('127.0.0.1', 43333)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 58316), raddr=('127.0.0.1', 40791)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_session_cohort_contains_only_past_and_all_novel_remaining_labels (test_graph_pipeline.GraphSparkTests.test_session_cohort_contains_only_past_and_all_novel_remaining_labels) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 54838), raddr=('127.0.0.1', 41969)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_dag_schedule_dependencies_and_http_graph_contract (test_graph_pipeline.SchedulerContracts.test_dag_schedule_dependencies_and_http_graph_contract) ... ok
+test_worker_forbids_other_algorithms (test_graph_pipeline.SchedulerContracts.test_worker_forbids_other_algorithms) ... ok
+test_worker_records_graph_version_and_rejects_non_graph_result (test_graph_pipeline.SchedulerContracts.test_worker_records_graph_version_and_rejects_non_graph_result) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 14.400s
+
+OK
+
+Running test_hybrid.py in an isolated Python/JVM process
+test_cold_user_gets_popularity_even_when_als_weight_is_one (test_hybrid.FusionTests.test_cold_user_gets_popularity_even_when_als_weight_is_one) ... ok
+test_invalid_weight_is_rejected (test_hybrid.FusionTests.test_invalid_weight_is_rejected) ... ok
+test_metrics_retain_cold_users_and_precision_denominator (test_hybrid.FusionTests.test_metrics_retain_cold_users_and_precision_denominator) ... ok
+test_rrf_rewards_agreement_and_never_reintroduces_seen (test_hybrid.FusionTests.test_rrf_rewards_agreement_and_never_reintroduces_seen) ... ok
+test_zero_weight_reproduces_unseen_popularity_without_duplicates (test_hybrid.FusionTests.test_zero_weight_reproduces_unseen_popularity_without_duplicates) ... ok
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/24 21:40:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/24 21:40:26 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: cf:c4:01:6c:ad:98:5e:c3
+test_cohort_excludes_repeats_and_keeps_new_users (test_hybrid.TemporalPopularityTests.test_cohort_excludes_repeats_and_keeps_new_users) ... [Stage 0:>                                                          (0 + 2) / 2][Stage 0:>                  (0 + 2) / 2][Stage 1:>                  (0 + 0) / 2][Stage 0:>                  (0 + 2) / 2][Stage 1:>                  (0 + 2) / 2]                                                                                /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 44886), raddr=('127.0.0.1', 34783)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 43672), raddr=('127.0.0.1', 45009)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_popularity_excludes_future_and_counts_visitors_once (test_hybrid.TemporalPopularityTests.test_popularity_excludes_future_and_counts_visitors_once) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 53440), raddr=('127.0.0.1', 36367)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 12.896s
+
+OK
+
+Running test_lineage.py in an isolated Python/JVM process
+test_cycle_is_rejected (test_lineage.DataLineageTests.test_cycle_is_rejected) ... ok
+test_explicit_canonical_data_source (test_lineage.DataLineageTests.test_explicit_canonical_data_source) ... ok
+test_identity_mismatch_is_rejected (test_lineage.DataLineageTests.test_identity_mismatch_is_rejected) ... ok
+test_ingestion_run_and_legacy_missing_report (test_lineage.DataLineageTests.test_ingestion_run_and_legacy_missing_report) ... ok
+test_malformed_source_and_path_escape_are_rejected (test_lineage.DataLineageTests.test_malformed_source_and_path_escape_are_rejected) ... ok
+test_multiple_model_generations_keep_live_data_source (test_lineage.DataLineageTests.test_multiple_model_generations_keep_live_data_source) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.009s
+
+OK
+
+Running test_neighborhood.py in an isolated Python/JVM process
+test_balanced_validation_selection_does_not_reward_one_metric_only (test_neighborhood.NeighborhoodContractTests.test_balanced_validation_selection_does_not_reward_one_metric_only) ... ok
+test_metrics_preserve_cold_and_macro_denominator (test_neighborhood.NeighborhoodContractTests.test_metrics_preserve_cold_and_macro_denominator) ... ok
+test_no_personal_history_falls_back_with_zero_pop_weight (test_neighborhood.NeighborhoodContractTests.test_no_personal_history_falls_back_with_zero_pop_weight) ... ok
+test_seen_removed_duplicates_and_exact_k_fill (test_neighborhood.NeighborhoodContractTests.test_seen_removed_duplicates_and_exact_k_fill) ... ok
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/24 21:40:39 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/24 21:40:39 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: 0e:73:95:4c:d0:9e:5b:99
+test_other_users_cooccurrence_learned_without_future_or_self_edges (test_neighborhood.NeighborhoodSparkTests.test_other_users_cooccurrence_learned_without_future_or_self_edges) ... [Stage 0:>                                                          (0 + 2) / 2][Stage 2:>                                                          (0 + 1) / 1]                                                                                /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 60568), raddr=('127.0.0.1', 34575)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+[Stage 18:>                 (0 + 2) / 2][Stage 19:>                 (0 + 0) / 2]                                                                                [Stage 25:>                                                         (0 + 2) / 2]                                                                                /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 43448), raddr=('127.0.0.1', 38295)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+NEIGHBORS cosine-min1: 1 users, 2 fitted targeted edges
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 38290), raddr=('127.0.0.1', 39881)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+NEIGHBORS jaccard-min2: 1 users, 2 fitted targeted edges
+ok
+test_secondary_is_disjoint_and_keeps_novelty_rule (test_neighborhood.NeighborhoodSparkTests.test_secondary_is_disjoint_and_keeps_novelty_rule) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 33678), raddr=('127.0.0.1', 45725)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 54724), raddr=('127.0.0.1', 34257)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 38882), raddr=('127.0.0.1', 33655)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 35326), raddr=('127.0.0.1', 46833)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 28.736s
+
+OK
+
+Running test_phase2.py in an isolated Python/JVM process
+test_all_four_topics_and_raw_names_are_preserved (test_phase2.ContractTests.test_all_four_topics_and_raw_names_are_preserved) ... ok
+test_blank_transaction_normalizes_to_json_null (test_phase2.ContractTests.test_blank_transaction_normalizes_to_json_null) ... ok
+test_hash_matches_documented_canonical_five_field_array (test_phase2.ContractTests.test_hash_matches_documented_canonical_five_field_array) ... ok
+test_missing_columns_and_blank_run_rejected (test_phase2.ContractTests.test_missing_columns_and_blank_run_rejected) ... ok
+test_replay_identity_independent_of_run_and_ingestion (test_phase2.ContractTests.test_replay_identity_independent_of_run_and_ingestion) ... ok
+test_synthetic_review_is_explicit_and_unicode_serializes (test_phase2.ContractTests.test_synthetic_review_is_explicit_and_unicode_serializes) ... ok
+test_unknown_event_and_invalid_ids_rejected (test_phase2.ContractTests.test_unknown_event_and_invalid_ids_rejected) ... ok
+test_wire_integer_schema_and_timezone_enforced (test_phase2.ContractTests.test_wire_integer_schema_and_timezone_enforced) ... ok
+test_wrong_topic_and_tampered_hash_rejected (test_phase2.ContractTests.test_wrong_topic_and_tampered_hash_rejected) ... ok
+test_ack_failure_propagates_with_partial_metrics (test_phase2.ProducerTests.test_ack_failure_propagates_with_partial_metrics) ... ok
+test_bad_csv_emits_failure_report_and_nonzero_exit (test_phase2.ProducerTests.test_bad_csv_emits_failure_report_and_nonzero_exit) ... ok
+test_bounded_pending_and_acknowledgement_counts (test_phase2.ProducerTests.test_bounded_pending_and_acknowledgement_counts) ... ok
+test_dry_run_writes_jsonl_and_metrics_without_kafka (test_phase2.ProducerTests.test_dry_run_writes_jsonl_and_metrics_without_kafka) ... ok
+test_empty_input_does_not_report_success (test_phase2.ProducerTests.test_empty_input_does_not_report_success) ... ok
+test_fixture_contains_eight_labeled_rows_and_four_topics (test_phase2.ProducerTests.test_fixture_contains_eight_labeled_rows_and_four_topics) ... ok
+test_timestamp_pacing_rejects_unsorted_input (test_phase2.ProducerTests.test_timestamp_pacing_rejects_unsorted_input) ... ok
+test_verifier_checks_scope_topic_key_and_contract (test_phase2.VerificationTests.test_verifier_checks_scope_topic_key_and_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.008s
+
+OK
+
+Running test_phase3_streaming.py in an isolated Python/JVM process
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/24 21:41:08 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/24 21:41:08 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: 02:14:b8:4f:92:45:ff:ab
+test_batch_window_session_features_and_boundaries (test_phase3_streaming.Phase3SparkTests.test_batch_window_session_features_and_boundaries) ... 26/10/24 21:41:13 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+[Stage 0:>                                                          (0 + 2) / 2]                                                                                /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 52464), raddr=('127.0.0.1', 35979)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 56588), raddr=('127.0.0.1', 41045)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_parse_validation_and_exact_epoch_milliseconds (test_phase3_streaming.Phase3SparkTests.test_parse_validation_and_exact_epoch_milliseconds) ... /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 45160), raddr=('127.0.0.1', 34305)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 51126), raddr=('127.0.0.1', 36307)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_streaming_dedup_lateness_features_and_checkpoint_restart (test_phase3_streaming.Phase3SparkTests.test_streaming_dedup_lateness_features_and_checkpoint_restart) ... 26/10/24 21:41:19 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/24 21:41:19 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+[Stage 11:>                                                         (0 + 1) / 1]                                                                                26/10/24 21:41:20 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1317 milliseconds
+26/10/24 21:41:20 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 1402 milliseconds
+26/10/24 21:41:21 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 307 milliseconds
+26/10/24 21:41:21 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 422 milliseconds
+26/10/24 21:41:21 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 522 milliseconds
+26/10/24 21:41:22 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 493 milliseconds
+26/10/24 21:41:22 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 516 milliseconds
+26/10/24 21:41:22 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 318 milliseconds
+26/10/24 21:41:23 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 426 milliseconds
+26/10/24 21:41:23 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 507 milliseconds
+26/10/24 21:41:24 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/24 21:41:24 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/24 21:41:24 WARN HDFSBackedStateStoreProvider: The state for version 6 doesn't exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
+26/10/24 21:41:24 WARN HDFSBackedStateStoreProvider: The state for version 6 doesn't exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
+26/10/24 21:41:24 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 388 milliseconds
+26/10/24 21:41:24 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 481 milliseconds
+26/10/24 21:41:24 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 256 milliseconds
+26/10/24 21:41:25 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/24 21:41:25 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/24 21:41:26 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 784 milliseconds
+26/10/24 21:41:26 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 980 milliseconds
+26/10/24 21:41:26 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 478 milliseconds
+26/10/24 21:41:26 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 200 milliseconds, but spent 432 milliseconds
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 56554), raddr=('127.0.0.1', 39819)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 54576), raddr=('127.0.0.1', 46443)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+26/10/24 21:41:27 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+26/10/24 21:41:27 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 48728), raddr=('127.0.0.1', 34129)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 24.503s
+
+OK
+
+Running test_service.py in an isolated Python/JVM process
+test_atomic_version_reload_ignores_old_cache (test_service.ServiceTests.test_atomic_version_reload_ignores_old_cache) ... ok
+test_cache_hit_rechecks_live_seen_history (test_service.ServiceTests.test_cache_hit_rechecks_live_seen_history) ... ok
+test_cache_payload_version_mismatch_is_ignored (test_service.ServiceTests.test_cache_payload_version_mismatch_is_ignored) ... ok
+test_hybrid_and_popularity_sources_survive_cache_and_filter_seen (test_service.ServiceTests.test_hybrid_and_popularity_sources_survive_cache_and_filter_seen) ... ok
+test_invalid_lineage_fails_closed_without_unrelated_history (test_service.ServiceTests.test_invalid_lineage_fails_closed_without_unrelated_history) ... ok
+test_invalid_schema_rejected_without_fake_ready (test_service.ServiceTests.test_invalid_schema_rejected_without_fake_ready) ... ok
+test_metrics_users_and_local_dashboard (test_service.ServiceTests.test_metrics_users_and_local_dashboard) ... ok
+test_not_ready_until_usable_bundle_and_liveness_independent (test_service.ServiceTests.test_not_ready_until_usable_bundle_and_liveness_independent) ... ok
+test_optional_redis_failure_falls_back_with_explicit_warning (test_service.ServiceTests.test_optional_redis_failure_falls_back_with_explicit_warning) ... ok
+test_personalized_seen_filter_and_popularity_fill (test_service.ServiceTests.test_personalized_seen_filter_and_popularity_fill) ... ok
+test_pointer_and_sidecar_path_traversal_rejected (test_service.ServiceTests.test_pointer_and_sidecar_path_traversal_rejected) ... ok
+test_pointer_switch_never_leaks_previous_run (test_service.ServiceTests.test_pointer_switch_never_leaks_previous_run) ... ok
+test_retrained_model_filters_canonical_data_history_even_on_cache_hit (test_service.ServiceTests.test_retrained_model_filters_canonical_data_history_even_on_cache_hit) ... ok
+test_same_run_failed_reload_retains_traceable_last_valid (test_service.ServiceTests.test_same_run_failed_reload_retains_traceable_last_valid) ... ok
+test_sqlite_filters_omitted_user_and_is_required_when_declared (test_service.ServiceTests.test_sqlite_filters_omitted_user_and_is_required_when_declared) ... ok
+test_strict_id_and_k_bounds (test_service.ServiceTests.test_strict_id_and_k_bounds) ... ok
+test_unknown_user_uses_explicit_popular_fallback (test_service.ServiceTests.test_unknown_user_uses_explicit_popular_fallback) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.304s
+
+OK
+
+Running test_session_audit.py in an isolated Python/JVM process
+test_canonical_hash_ignores_prediction_and_row_order_only (test_session_audit.SessionAuditTests.test_canonical_hash_ignores_prediction_and_row_order_only) ... ok
+test_duplicates_seen_targets_and_missing_shared_context_rejected (test_session_audit.SessionAuditTests.test_duplicates_seen_targets_and_missing_shared_context_rejected) ... ok
+test_full_audit_preserves_protocols_and_reference (test_session_audit.SessionAuditTests.test_full_audit_preserves_protocols_and_reference) ... ok
+test_future_context_and_equal_target_time_are_rejected (test_session_audit.SessionAuditTests.test_future_context_and_equal_target_time_are_rejected) ... ok
+test_graph_cutoff_must_precede_inference_time (test_session_audit.SessionAuditTests.test_graph_cutoff_must_precede_inference_time) ... ok
+test_late_plan_and_early_evaluation_rejected (test_session_audit.SessionAuditTests.test_late_plan_and_early_evaluation_rejected) ... ok
+test_macro_denominator_keeps_misses_and_all_three_models (test_session_audit.SessionAuditTests.test_macro_denominator_keeps_misses_and_all_three_models) ... ok
+test_policy_changes_after_freeze_rejected (test_session_audit.SessionAuditTests.test_policy_changes_after_freeze_rejected) ... ok
+test_promotion_requires_improvement_on_every_validation_metric (test_session_audit.SessionAuditTests.test_promotion_requires_improvement_on_every_validation_metric) ... ok
+test_query_id_collision_rejected (test_session_audit.SessionAuditTests.test_query_id_collision_rejected) ... ok
+test_session_requires_one_target_and_past_context (test_session_audit.SessionAuditTests.test_session_requires_one_target_and_past_context) ... ok
+test_static_macro_recall_is_not_session_recall (test_session_audit.SessionAuditTests.test_static_macro_recall_is_not_session_recall) ... ok
+test_static_reference_changes_cannot_hide_behind_new_cohort_hash (test_session_audit.SessionAuditTests.test_static_reference_changes_cannot_hide_behind_new_cohort_hash) ... ok
+test_validation_cannot_use_later_than_final_training_period (test_session_audit.SessionAuditTests.test_validation_cannot_use_later_than_final_training_period) ... ok
+test_validation_mean_tampering_rejected (test_session_audit.SessionAuditTests.test_validation_mean_tampering_rejected) ... ok
+test_winner_must_follow_ndcg_then_recall_precision_name_rule (test_session_audit.SessionAuditTests.test_winner_must_follow_ndcg_then_recall_precision_name_rule) ... ok
+test_wrong_metric_or_hash_is_rejected (test_session_audit.SessionAuditTests.test_wrong_metric_or_hash_is_rejected) ... ok
+test_zero_hits_and_regression_are_valid_outcomes (test_session_audit.SessionAuditTests.test_zero_hits_and_regression_are_valid_outcomes) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.036s
+
+OK
+
+Running test_session_gate.py in an isolated Python/JVM process
+test_equal_hit_totals_with_roundoff_are_not_improvement (test_session_gate.SessionGateTests.test_equal_hit_totals_with_roundoff_are_not_improvement) ... ok
+test_every_metric_must_improve (test_session_gate.SessionGateTests.test_every_metric_must_improve) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+
+Running test_session_model.py in an isolated Python/JVM process
+test_cart_and_purchase_intent_change_candidate_order (test_session_model.SessionModelTests.test_cart_and_purchase_intent_change_candidate_order) ... ok
+test_duplicate_events_do_not_accumulate_unbounded_strength (test_session_model.SessionModelTests.test_duplicate_events_do_not_accumulate_unbounded_strength) ... ok
+test_future_events_are_rejected_in_both_inference_entry_points (test_session_model.SessionModelTests.test_future_events_are_rejected_in_both_inference_entry_points) ... ok
+test_same_item_uses_max_event_strength_and_latest_timestamp (test_session_model.SessionModelTests.test_same_item_uses_max_event_strength_and_latest_timestamp) ... ok
+test_seed_limit_uses_latest_distinct_items_with_deterministic_ties (test_session_model.SessionModelTests.test_seed_limit_uses_latest_distinct_items_with_deterministic_ties) ... ok
+test_seen_filter_covers_context_and_explicit_history_and_fallback (test_session_model.SessionModelTests.test_seen_filter_covers_context_and_explicit_history_and_fallback) ... ok
+test_sqlite_http_helper_matches_in_memory_offline_ranker (test_session_model.SessionModelTests.test_sqlite_http_helper_matches_in_memory_offline_ranker) ... ok
+test_time_decay_changes_rank_with_no_position_or_intent_change (test_session_model.SessionModelTests.test_time_decay_changes_rank_with_no_position_or_intent_change) ... ok
+test_unmatched_context_falls_back_without_seen_or_duplicate_items (test_session_model.SessionModelTests.test_unmatched_context_falls_back_without_seen_or_duplicate_items) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.010s
+
+OK
+
+Running test_session_multilabel.py in an isolated Python/JVM process
+test_existing_next_item_must_remain_in_future_labels (test_session_multilabel.MultiLabelSessionTests.test_existing_next_item_must_remain_in_future_labels) ... ok
+test_future_labels_include_same_time_targets_and_later_new_items (test_session_multilabel.MultiLabelSessionTests.test_future_labels_include_same_time_targets_and_later_new_items) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+
+Running test_session_service.py in an isolated Python/JVM process
+test_context_and_known_user_history_are_both_excluded (test_session_service.SessionServiceTests.test_context_and_known_user_history_are_both_excluded) ... ok
+test_contexts_are_independent_and_empty_context_is_explicit_fallback (test_session_service.SessionServiceTests.test_contexts_are_independent_and_empty_context_is_explicit_fallback) ... ok
+test_http_roundtrip_uses_real_graph_and_distinct_versions (test_session_service.SessionServiceTests.test_http_roundtrip_uses_real_graph_and_distinct_versions) ... ok
+test_malformed_schema_and_traversal_refused (test_session_service.SessionServiceTests.test_malformed_schema_and_traversal_refused) ... ok
+test_metrics_are_separate_and_do_not_overwrite_static_evaluation (test_session_service.SessionServiceTests.test_metrics_are_separate_and_do_not_overwrite_static_evaluation) ... ok
+test_missing_index_refuses_session_but_keeps_static_model_available (test_session_service.SessionServiceTests.test_missing_index_refuses_session_but_keeps_static_model_available) ... ok
+test_old_bundle_without_session_is_still_servable (test_session_service.SessionServiceTests.test_old_bundle_without_session_is_still_servable) ... ok
+test_omitted_timestamp_uses_server_clock_and_event_types_are_supported (test_session_service.SessionServiceTests.test_omitted_timestamp_uses_server_clock_and_event_types_are_supported) ... ok
+test_rejects_future_invalid_and_unbounded_payloads (test_session_service.SessionServiceTests.test_rejects_future_invalid_and_unbounded_payloads) ... ok
+test_session_filters_full_sqlite_history_for_user_outside_exported_cache (test_session_service.SessionServiceTests.test_session_filters_full_sqlite_history_for_user_outside_exported_cache) ... ok
+test_session_reads_canonical_online_history_without_cross_run_leakage (test_session_service.SessionServiceTests.test_session_reads_canonical_online_history_without_cross_run_leakage) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.277s
+
+OK
+
+Running test_session_training.py in an isolated Python/JVM process
+test_cold_catalog_targets_are_retained (test_session_training.SessionCohortTests.test_cold_catalog_targets_are_retained) ... ok
+test_coverage_reports_sessions_without_eligible_context_and_target (test_session_training.SessionCohortTests.test_coverage_reports_sessions_without_eligible_context_and_target) ... ok
+test_first_new_target_skips_repeats_and_excludes_later_events (test_session_training.SessionCohortTests.test_first_new_target_skips_repeats_and_excludes_later_events) ... ok
+test_period_end_and_global_cutoff_are_respected (test_session_training.SessionCohortTests.test_period_end_and_global_cutoff_are_respected) ... ok
+test_sampling_uses_session_keys_and_is_independent_of_input_order_and_target_ids (test_session_training.SessionCohortTests.test_sampling_uses_session_keys_and_is_independent_of_input_order_and_target_ids) ... ok
+test_simultaneous_events_are_never_each_others_past_context (test_session_training.SessionCohortTests.test_simultaneous_events_are_never_each_others_past_context) ... ok
+test_thirty_minute_gap_is_inclusive_and_larger_gap_starts_new_context (test_session_training.SessionCohortTests.test_thirty_minute_gap_is_inclusive_and_larger_gap_starts_new_context) ... ok
+test_binary_graph_caps_latest_twenty_distinct_pairs_per_visitor (test_session_training.SparseTrainingTests.test_binary_graph_caps_latest_twenty_distinct_pairs_per_visitor) ... FIT {"graph": "binary_user", "train_end_inclusive": 30, "input_events": 24, "entity_item_pairs_before_cap": 24, "entity_item_pairs_after_cap": 22, "entities": 2, "catalog_items": 22, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+ok
+test_binary_graph_matches_exact_jaccard_shrinkage_counts (test_session_training.SparseTrainingTests.test_binary_graph_matches_exact_jaccard_shrinkage_counts) ... FIT {"graph": "binary_user", "train_end_inclusive": 10, "input_events": 7, "entity_item_pairs_before_cap": 7, "entity_item_pairs_after_cap": 7, "entities": 4, "catalog_items": 3, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+ok
+test_cap_breaks_equal_timestamp_ties_by_ascending_item_id (test_session_training.SparseTrainingTests.test_cap_breaks_equal_timestamp_ties_by_ascending_item_id) ... FIT {"graph": "binary_user", "train_end_inclusive": 100, "input_events": 21, "entity_item_pairs_before_cap": 21, "entity_item_pairs_after_cap": 20, "entities": 1, "catalog_items": 20, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+ok
+test_future_events_do_not_change_any_graph_or_catalog (test_session_training.SparseTrainingTests.test_future_events_do_not_change_any_graph_or_catalog) ... FIT {"graph": "binary_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "binary_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": null, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_session", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_session", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 5, "entity_item_pairs_after_cap": 5, "entities": 3, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+ok
+test_session_graph_does_not_link_items_across_separate_sessions (test_session_training.SparseTrainingTests.test_session_graph_does_not_link_items_across_separate_sessions) ... FIT {"graph": "weighted_user", "train_end_inclusive": 3000000, "input_events": 4, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 1, "catalog_items": 4, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_session", "train_end_inclusive": 3000000, "input_events": 4, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 2, "catalog_items": 4, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+ok
+test_weighted_graph_uses_maximum_decayed_intent_not_event_sum (test_session_training.SparseTrainingTests.test_weighted_graph_uses_maximum_decayed_intent_not_event_sum) ... FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 5, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 2, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+FIT {"graph": "weighted_user", "train_end_inclusive": 100, "input_events": 105, "entity_item_pairs_before_cap": 4, "entity_item_pairs_after_cap": 4, "entities": 2, "catalog_items": 3, "half_life_days": 30, "max_items_per_entity": 20, "neighbor_limit": 100, "binary_similarity": "jaccard", "shrinkage": 3}
+ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.169s
+
+OK
+
+Running test_session_transition.py in an isolated Python/JVM process
+test_continuation_graph_uses_only_strictly_later_new_items (test_session_transition.TransitionTests.test_continuation_graph_uses_only_strictly_later_new_items) ... ok
+test_sqlite_inference_matches_offline_fusion_and_filters_seen (test_session_transition.TransitionTests.test_sqlite_inference_matches_offline_fusion_and_filters_seen) ... ok
+test_strength_sqlite_inference_matches_offline_and_filters_seen (test_session_transition.TransitionTests.test_strength_sqlite_inference_matches_offline_and_filters_seen) ... ok
+test_training_uses_only_prior_timestamp_groups_and_new_items (test_session_transition.TransitionTests.test_training_uses_only_prior_timestamp_groups_and_new_items) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.014s
+
+OK
+
+Running test_sort_events.py in an isolated Python/JVM process
+test_atomic_commit_race_does_not_clobber_competing_file (test_sort_events.SortEventsTests.test_atomic_commit_race_does_not_clobber_competing_file) ... ok
+test_empty_csv_with_valid_header_outputs_header_only (test_sort_events.SortEventsTests.test_empty_csv_with_valid_header_outputs_header_only) ... ok
+test_equal_timestamps_stable_across_multiple_merge_passes (test_sort_events.SortEventsTests.test_equal_timestamps_stable_across_multiple_merge_passes) ... ok
+test_existing_output_and_input_overwrite_are_rejected (test_sort_events.SortEventsTests.test_existing_output_and_input_overwrite_are_rejected) ... ok
+test_invalid_timestamp_or_header_leaves_no_output (test_sort_events.SortEventsTests.test_invalid_timestamp_or_header_leaves_no_output) ... ok
+test_sort_across_chunks_preserves_every_raw_field (test_sort_events.SortEventsTests.test_sort_across_chunks_preserves_every_raw_field) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.038s
+
+OK
+
+Running test_storage.py in an isolated Python/JVM process
+test_build_retry_and_actual_acid_time_travel (test_storage.DeltaIntegrationTests.test_build_retry_and_actual_acid_time_travel) ... skipped 'Set RUN_DELTA_TESTS=1 in the Java/Delta runtime'
+test_real_mongo_redis_retry_session_bridge_and_seen_set (test_storage.OnlineIntegrationTests.test_real_mongo_redis_retry_session_bridge_and_seen_set) ... skipped 'Set RUN_ONLINE_TESTS=1 with MongoDB/Redis running'
+test_dedup_order_window_and_late_session_bridge (test_storage.ProjectionTests.test_dedup_order_window_and_late_session_bridge) ... ok
+test_retry_replaces_projections_removes_stale_sessions_and_isolates_runs (test_storage.ProjectionTests.test_retry_replaces_projections_removes_stale_sessions_and_isolates_runs) ... ok
+test_utc_milliseconds_and_missing_metrics (test_storage.ProjectionTests.test_utc_milliseconds_and_missing_metrics) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK (skipped=2)
+
+Running test_training.py in an isolated Python/JVM process
+test_chronological_splits_precede_validation_and_keep_equal_times_together (test_training.RankingTests.test_chronological_splits_precede_validation_and_keep_equal_times_together) ... ok
+test_known_binary_ranking_values_and_fixed_precision_denominator (test_training.RankingTests.test_known_binary_ranking_values_and_fixed_precision_denominator) ... ok
+test_missing_cold_predictions_are_misses_and_duplicate_ids_do_not_inflate (test_training.RankingTests.test_missing_cold_predictions_are_misses_and_duplicate_ids_do_not_inflate) ... ok
+test_quick_grid_really_selects_multiple_candidates_and_full_grid_tunes_alpha (test_training.RankingTests.test_quick_grid_really_selects_multiple_candidates_and_full_grid_tunes_alpha) ... ok
+test_seen_filter_is_unique_score_ordered_and_deterministic (test_training.RankingTests.test_seen_filter_is_unique_score_ordered_and_deterministic) ... ok
+test_sqlite_sidecar_contains_all_seen_users_beyond_json_scope (test_training.RankingTests.test_sqlite_sidecar_contains_all_seen_users_beyond_json_scope) ... ok
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/24 21:41:35 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/24 21:41:35 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: b0:b7:f2:a9:7e:b9:7c:90
+test_real_als_pipeline_persists_and_filters_seen_items (test_training.SparkALSTests.test_real_als_pipeline_persists_and_filters_seen_items) ... [Stage 0:>                                                          (0 + 2) / 2]                                                                                /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 37218), raddr=('127.0.0.1', 34505)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 37104), raddr=('127.0.0.1', 42475)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 37316), raddr=('127.0.0.1', 45629)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 37936), raddr=('127.0.0.1', 37425)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 43614), raddr=('127.0.0.1', 40749)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 37014), raddr=('127.0.0.1', 37963)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 40974), raddr=('127.0.0.1', 34943)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 45638), raddr=('127.0.0.1', 33757)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 56192), raddr=('127.0.0.1', 36773)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 34268), raddr=('127.0.0.1', 41981)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 52926), raddr=('127.0.0.1', 46441)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py:791: ResourceWarning: unclosed <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 46888), raddr=('127.0.0.1', 39225)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 26.818s
+
+OK
+
+Module results: [('test_graph_pipeline.py', 0), ('test_hybrid.py', 0), ('test_lineage.py', 0), ('test_neighborhood.py', 0), ('test_phase2.py', 0), ('test_phase3_streaming.py', 0), ('test_service.py', 0), ('test_session_audit.py', 0), ('test_session_gate.py', 0), ('test_session_model.py', 0), ('test_session_multilabel.py', 0), ('test_session_service.py', 0), ('test_session_training.py', 0), ('test_session_transition.py', 0), ('test_sort_events.py', 0), ('test_storage.py', 0), ('test_training.py', 0)]

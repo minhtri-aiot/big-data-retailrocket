@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "source_zip": "C:\\Users\\DUONG MINH TRI\\Downloads\\RetailRocket_Graph_Unified_Full_Source.zip",
+  "sha256": "6f415299750e1e522b8b26f64b870b6cf3ae35223cdccdb68d84249a4df19d86",
+  "archive_bytes": 80730247,
+  "files": 238,
+  "uncompressed_bytes": 89400457,
+  "crc_checks_passed": true,
+  "fresh_extraction": true,
+  "project_directory": "D:\\BIGDATA\\RetailRocket_Graph_Unified\\big-data-retailrocket"
+}

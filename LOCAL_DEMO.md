@@ -1,3 +1,5 @@
+> **Cập nhật Graph thống nhất:** nội dung bên dưới là hướng dẫn/lịch sử trước khi thống nhất Phase 5–6. Dùng [Runbook hiện hành](docs/GRAPH_RUNBOOK.md) và [kiểm thử bản mới](docs/GRAPH_VALIDATION.md). Không dùng số liệu cũ làm kết quả bản mới.
+
 # Demo hiện tại: Retail Signal Storefront
 
 Dự án làm việc: `D:\BIGDATA\big_data_update_2`. Bản giao diện cửa hàng được xuất riêng thành `D:\BIGDATA\big_data_update_2_storefront_v2.zip`. File gốc `big_data_update_2.zip`, ZIP cửa hàng trước và bản dashboard trước được giữ nguyên.

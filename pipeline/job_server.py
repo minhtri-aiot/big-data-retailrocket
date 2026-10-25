@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 from threading import Lock
+from typing import Literal
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -20,6 +21,7 @@ active_job = None
 class RetrainRequest(BaseModel):
     request_id: str = Field(min_length=1, max_length=256)
     quick: bool = True
+    algorithm: Literal["graph_session"] = "graph_session"
 
 
 def job_file(job_id):
@@ -33,7 +35,11 @@ def run_job(job):
     try:
         from pipeline.runner import execute
         report = execute(job["run_id"], os.getenv("OUTPUT_ROOT", "outputs"), quick=job["quick"], source_run_id=job["source_run_id"])
-        job.update(status="completed", result={"run_id": report["run_id"], "elapsed_seconds": report["elapsed_seconds"]})
+        training = report["stages"]["training"]
+        if training["algorithm"] != "graph_session":
+            raise ValueError("Retraining must produce Graph, never ALS")
+        job.update(status="completed", result={"run_id": report["run_id"], "elapsed_seconds": report["elapsed_seconds"],
+                    "algorithm": training["algorithm"], "model_version": training["model_version"]})
     except Exception as error:
         job.update(status="failed", error=f"{type(error).__name__}: {error}")
     finally:
@@ -63,10 +69,10 @@ def retrain(request: RetrainRequest):
         if active_job is not None:
             raise HTTPException(409, "One retraining job is already active")
         try:
-            source = latest_run()
+            source = latest_run(os.getenv("OUTPUT_ROOT", "outputs"))
         except (OSError, ValueError, KeyError):
             raise HTTPException(409, "Run the initial data pipeline before scheduling retraining")
-        job = {"job_id": identifier, "request_id": request.request_id, "source_run_id": source,
+        job = {"job_id": identifier, "request_id": request.request_id, "source_run_id": source, "algorithm": "graph_session",
                "run_id": f"retrain-{identifier}", "quick": request.quick, "status": "queued", "created_at_utc": utc_now()}
         active_job = identifier
         atomic_json(path, job)

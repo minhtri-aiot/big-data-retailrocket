@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "run_id": "graph-full-20261024",
+  "algorithm": "graph_session",
+  "model_version": "graph-graph-full-20261024-v1",
+  "metrics_recomputed_queries": 5000,
+  "checks": [
+    "artifact hashes",
+    "API model/metric identity",
+    "Graph scorer parity",
+    "seen filtering",
+    "cold-start"
+  ],
+  "samples": [
+    {
+      "source": "popular_fallback",
+      "returned": 10
+    },
+    {
+      "source": "popular_fallback",
+      "returned": 10
+    },
+    {
+      "source": "session_strength_fusion",
+      "returned": 10
+    }
+  ],
+  "scope": "Graph artifact + HTTP; does not assert infrastructure or scheduler execution"
+}

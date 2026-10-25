@@ -1,0 +1,40 @@
+{
+  "algorithm": "graph_session",
+  "model_family_locked": true,
+  "config": {
+    "graph": "binary_user",
+    "similarity": "conditional",
+    "fusion": "strength",
+    "transition_weight": 0.25,
+    "strength_power": 0.5,
+    "seed_limit": 5,
+    "position_decay": 0.8,
+    "query_half_life_minutes": null,
+    "event_weights": {
+      "view": 1.0,
+      "addtocart": 1.0,
+      "transaction": 1.0
+    }
+  },
+  "boundaries_epoch_ms": [
+    1436450667169,
+    1438557297020,
+    1440540443918
+  ],
+  "maximum_epoch_ms": 1442545187788,
+  "split": "event-row approximate quantiles 50/70/85% (error<=0.001); timestamp ties kept together",
+  "protocol": "remaining_session",
+  "seen_scope": "anonymous session only",
+  "k": 10,
+  "source": {
+    "format": "csv",
+    "uri": "data/raw/events.csv",
+    "sha256": "3745aa83238b1e6d44d8fda209807899f420084398f94ddf745f3cbcfecbf9e7"
+  },
+  "training_events": 2755641,
+  "query_cap": 5000,
+  "max_user_items": 20,
+  "neighbor_limit": 100,
+  "als_role": "benchmark_only",
+  "test_reuse_disclosure": "RetailRocket historical period has been examined during earlier project development; not an untouched future benchmark"
+}

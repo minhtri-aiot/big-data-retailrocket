@@ -5,3 +5,5 @@ outputs
 references
 data/raw
 *.zip
+.pytest_cache
+spark-warehouse

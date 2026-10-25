@@ -1,0 +1,9 @@
+26/10/24 21:48:00 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/24 21:48:01 WARN MacAddressUtil: Failed to find a usable hardware address from the network interfaces; using random bytes: bd:bc:71:55:12:75:d8:a9
+[Stage 0:>                                                          (0 + 2) / 2]                                                                                [Stage 3:====>                                                     (4 + 3) / 50][Stage 3:==============>                                          (13 + 2) / 50][Stage 3:=====================>                                   (19 + 2) / 50][Stage 3:==================================>                      (30 + 2) / 50][Stage 3:===============================================>         (42 + 2) / 50]                                                                                GRAPH validation fold 1
+GRAPH validation fold 2
+GRAPH held-out evaluation (before full-history refit)
+GRAPH serving refit on all input
+{'status': 'passed', 'scope': 'local Delta Silver v0 -> main Graph trainer -> validated API artifact', 'events': 100, 'algorithm': 'graph_session', 'delta_version': 0, 'hdfs_kafka_airflow_exercised': False, 'dependencies': 'Delta 3.3.3 jars preloaded from official Maven repository; Java resolver network unavailable'}

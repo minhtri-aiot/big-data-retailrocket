@@ -1,0 +1,48 @@
+{
+  "status": "passed_for_declared_scope",
+  "tests_total": 145,
+  "tests_passed": 143,
+  "tests_skipped": 2,
+  "module_exit_codes": "All 17 isolated test modules exited 0; source log included",
+  "opt_in_environments": {
+    "SPARK_LOCAL_IP": "127.0.0.1",
+    "BIGDATA_RUN_GRAPH_TESTS": "1",
+    "BIGDATA_RUN_SPARK_ML_TESTS": "1"
+  },
+  "tested": [
+    "real Spark Graph train/evaluation on full RetailRocket",
+    "real Spark MLlib ALS baseline, same test cohort",
+    "HTTP scorer parity and metric recomputation (5000 queries)",
+    "Graph artifact checksums and version identity",
+    "cold start and seen filtering",
+    "DOM + real HTTP interactions",
+    "local Delta v0 main Graph entry point (100-event fixture)",
+    "Airflow DAG/worker contracts (stub/mock)",
+    "gzip snapshot installation into fresh output directory"
+  ],
+  "not_verified": [
+    "Docker build/Compose execution",
+    "Kafka broker full pipeline execution in this environment",
+    "HDFS NameNode/DataNode and MongoDB/Redis live connectivity",
+    "Airflow real scheduler/DAG execution",
+    "real browser visual layout and mobile rendering"
+  ],
+  "dependency_limitations": "Default Java Maven resolver failed DNS; Delta integration used official preloaded jars. Playwright Chromium download returned an unavailable page; Dashboard validated with jsdom and real HTTP only.",
+  "source_commit": "1f602e227af5f36257e9280de6eafe205f132f9a",
+  "python": "3.12.14",
+  "pyspark": "3.5.6",
+  "java": "OpenJDK 17.0.20",
+  "model_version": "graph-graph-full-20261024-v1",
+  "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+  "final_checks": {
+    "yaml_parse": "all three compose files parsed",
+    "python_compile": "passed",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed"
+  },
+  "final_targeted_tests": {
+    "passed": 10,
+    "skipped": 3,
+    "scope": "Graph API/worker/metric contracts after malformed-config guard; real Spark tests already passed in isolated suite"
+  }
+}

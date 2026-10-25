@@ -1,0 +1,100 @@
+{
+  "run_id": "graph-full-20261024",
+  "source_run_id": null,
+  "status": "completed",
+  "started_at_utc": "2026-10-24T14:31:54.903+00:00",
+  "scope": "standalone offline Graph training; Kafka/HDFS/NoSQL orchestration not exercised",
+  "algorithm": "graph_session",
+  "finished_at_utc": "2026-10-24T14:38:26.671+00:00",
+  "training": {
+    "algorithm": "graph_session",
+    "model_version": "graph-graph-full-20261024-v1",
+    "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+    "events": 2755641,
+    "graph": {
+      "neighbors": 2671950,
+      "transitions": 454978,
+      "sha256": "f55c16fee1771d19e5b0f494fac00804e6151920cdd62ad02bf9ca1aa7347812",
+      "bytes": 189218816
+    },
+    "metrics": {
+      "protocol_kind": "remaining_session",
+      "k": 10,
+      "selected": {
+        "k": 10,
+        "eligible_queries": 5000,
+        "status": "evaluated",
+        "precision_at_k": 0.041259999999998874,
+        "recall_at_k": 0.28227074387121825,
+        "ndcg_at_k": 0.1967340741010554,
+        "hit_rate_at_k": 0.3446
+      },
+      "served": {
+        "k": 10,
+        "eligible_queries": 5000,
+        "status": "evaluated",
+        "precision_at_k": 0.041259999999998874,
+        "recall_at_k": 0.28227074387121825,
+        "ndcg_at_k": 0.1967340741010554,
+        "hit_rate_at_k": 0.3446
+      },
+      "selected_model_promoted": true,
+      "popularity": {
+        "k": 10,
+        "eligible_queries": 5000,
+        "status": "evaluated",
+        "precision_at_k": 0.0007400000000000004,
+        "recall_at_k": 0.004296875629466372,
+        "ndcg_at_k": 0.001989880339032781,
+        "hit_rate_at_k": 0.0074
+      },
+      "heldout_test": {
+        "k": 10,
+        "eligible_queries": 5000,
+        "status": "evaluated",
+        "precision_at_k": 0.041259999999998874,
+        "recall_at_k": 0.28227074387121825,
+        "ndcg_at_k": 0.1967340741010554,
+        "hit_rate_at_k": 0.3446
+      },
+      "als_comparison": {
+        "status": "evaluated",
+        "metrics": {
+          "k": 10,
+          "eligible_queries": 5000,
+          "status": "evaluated",
+          "precision_at_k": 0.0015199999999999981,
+          "recall_at_k": 0.008445839609930353,
+          "ndcg_at_k": 0.004886043291134452,
+          "hit_rate_at_k": 0.0136
+        },
+        "policy": "historical-user implicit ALS + identical popularity fallback; no context fold-in",
+        "hyperparameters": {
+          "rank": 16,
+          "regParam": 0.1,
+          "alpha": 20,
+          "maxIter": 5
+        },
+        "claim": "No general superiority claim; same temporal cutoff, cohort, labels, K and seen scope; ALS user-ID input differs from Graph session input; baseline not tuned"
+      },
+      "label_profile": {
+        "active_sessions": 274409,
+        "eligible_sessions": 38875,
+        "eligible_queries": 5000,
+        "query_cap": 5000,
+        "selection": "lowest SHA256(visitorid:session_start:42); before scoring",
+        "queries_with_multiple_labels": 1777
+      },
+      "metric_model_version": "graph-graph-full-20261024-v1:evaluation-before-1440540443918",
+      "served_policy": "Spark conditional item-item 75% + transition 25%",
+      "test_reuse_disclosure": "RetailRocket historical period has been examined during earlier project development; not an untouched future benchmark",
+      "limitations": [
+        "Conditional on a session with prior context and a later novel item; excludes single-event sessions.",
+        "Cold users/items remain in cohort; no negative sampling. Unknown items need observed edges or fallback.",
+        "Historical test graph excludes future events; serving graph refit on all input after scores frozen.",
+        "Graph top-neighbor and user-history caps bound retrieval. Scores are not purchase probabilities."
+      ]
+    },
+    "elapsed_seconds": 378.877
+  }
+}

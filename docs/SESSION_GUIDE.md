@@ -1,3 +1,5 @@
+> **Cập nhật Graph thống nhất:** nội dung bên dưới là hướng dẫn/lịch sử trước khi thống nhất Phase 5–6. Dùng [Runbook hiện hành](GRAPH_RUNBOOK.md) và [kiểm thử bản mới](GRAPH_VALIDATION.md). Không dùng số liệu cũ làm kết quả bản mới.
+
 # Chạy và trình bày demo gợi ý theo phiên
 
 Bản nâng cấp thêm một nhánh gợi ý từ hành vi mới nhất trong phiên và một graph item-item có trọng số tương tác/độ mới. Nhánh đánh giá theo người dùng của bản trước được giữ riêng để so sánh. Điểm trong hai nhánh đo hai bài toán khác nhau; không ghép thành một bảng xếp hạng chung.

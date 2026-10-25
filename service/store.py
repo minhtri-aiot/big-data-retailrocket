@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from contextlib import closing
 from datetime import datetime
 import json
+import hashlib
 import math
 import os
 from pathlib import Path
@@ -30,6 +31,7 @@ class Settings:
     mongo_db: str = "bigdata"
     cache_ttl: int = 60
     max_bundle_bytes: int = 256 * 1024 * 1024
+    require_graph: bool = False  # Explicit Settings may inspect historical test fixtures.
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -39,6 +41,7 @@ class Settings:
             redis_url=os.getenv("REDIS_URL") or None,
             mongo_uri=os.getenv("MONGO_URI") or os.getenv("MONGODB_URI") or None,
             mongo_db=os.getenv("MONGO_DB", "bigdata"),
+            require_graph=True,  # Application runtime never serves a legacy ALS bundle.
         )
 
 
@@ -96,7 +99,7 @@ def validate_bundle(data: Any, expected_run: str) -> dict:
     version = data.get("model_version")
     if not isinstance(version, str) or not version.strip() or len(version) > 200:
         raise BundleError("model_version must be a nonempty string of at most 200 characters")
-    if data.get("algorithm") not in {"als_implicit", "als_popularity_hybrid", "popularity_recent", "item_knn_hybrid"}:
+    if data.get("algorithm") not in {"graph_session", "als_implicit", "als_popularity_hybrid", "popularity_recent", "item_knn_hybrid"}:
         raise BundleError("Unsupported recommendation algorithm")
     try:
         timestamp = datetime.fromisoformat(data["trained_at_utc"].replace("Z", "+00:00"))
@@ -123,6 +126,15 @@ def validate_bundle(data: Any, expected_run: str) -> dict:
     if not isinstance(data.get("metrics"), dict):
         raise BundleError("metrics must be an object")
     session = data.get("session_model")
+    if data.get("algorithm") == "graph_session":
+        if not isinstance(session, dict) or not isinstance(session.get("configuration"), dict) or session.get("model_version") != version:
+            raise BundleError("Graph bundle and scorer must share the same model_version")
+        if session.get("metric_model_version") != data.get("metric_model_version"):
+            raise BundleError("Graph evaluation version mismatch")
+        if session.get("configuration", {}).get("fusion") != "strength":
+            raise BundleError("Main Graph requires strength fusion configuration")
+        if set(data.get("artifact_hashes", {})) != {"session_neighbors.sqlite", "seen_items.sqlite"}:
+            raise BundleError("Graph requires both artifact checksums")
     if session is not None:
         if not isinstance(session, dict) or session.get("index_file") != "session_neighbors.sqlite":
             raise BundleError("session_model must declare the run-local session_neighbors.sqlite index")
@@ -174,14 +186,23 @@ class BundleStore:
                 else:
                     candidate, signature = read_json(path, self.settings.max_bundle_bytes)
                     data = validate_bundle(candidate, selected)
+                    if self.settings.require_graph and data["algorithm"] != "graph_session":
+                        raise BundleError("Train a Phase 5 Graph artifact before serving")
                     self._check_history_store(data)
+                    if data["algorithm"] == "graph_session":
+                        index = self.session_index(data)
+                        self._check_graph_artifacts(data, index)
                     self.current = LoadedBundle(data, signature)
                 self._check_history_store(data)
+                if data["algorithm"] == "graph_session":
+                    self._check_graph_artifacts(data, self.session_index(data))
                 return data, self._status(data, False)
             except (OSError, ValueError) as error:
                 if self.current is not None and self.current.data["run_id"] == selected:
                     try:
                         self._check_history_store(self.current.data)
+                        if self.current.data["algorithm"] == "graph_session":
+                            self._check_graph_artifacts(self.current.data, self.session_index(self.current.data))
                     except BundleError:
                         return None, {"ready": False, "run_id": selected, "stale": False,
                                       "error": "Required local history sidecar unavailable"}
@@ -240,6 +261,37 @@ class BundleStore:
             except (OSError, sqlite3.Error) as error:
                 raise BundleError("History lookup failed; unsafe fallback refused") from error
         return seen, path is not None
+
+    def _check_graph_artifacts(self, data, index):
+        # Hash once per file signature/version, and again if a sidecar changes.
+        for name, expected in data["artifact_hashes"].items():
+            path = index.parent / name
+            signature = _signature(path)
+            key = (str(path), signature, expected)
+            verified = getattr(self, "verified_hashes", set())
+            if key not in verified:
+                with path.open("rb") as stream:
+                    if hashlib.file_digest(stream, "sha256").hexdigest() != expected:
+                        raise BundleError("Graph artifact checksum mismatch")
+                self.verified_hashes = {entry for entry in verified if entry[0] != str(path)} | {key}
+        try:
+            with closing(sqlite3.connect(index.resolve().as_uri() + "?mode=ro", uri=True)) as db:
+                row = db.execute("SELECT value FROM metadata WHERE key='model_version'").fetchone()
+                if row is None or json.loads(row[0]) != data["model_version"]:
+                    raise BundleError("Graph index version does not match bundle")
+        except (sqlite3.Error, ValueError) as error:
+            raise BundleError("Graph index identity unavailable") from error
+
+    def recent_context(self, data, visitorid):
+        """Last snapshot items for compatibility user endpoint; no ALS list."""
+        path = self.session_index(data)
+        with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as db:
+            # A graph build without persisted context can safely use popularity.
+            try:
+                rows = db.execute("SELECT itemid,timestamp,event FROM user_context WHERE visitorid=? ORDER BY timestamp DESC,itemid LIMIT 100", (visitorid,)).fetchall()
+            except sqlite3.OperationalError:
+                rows = []
+        return [{"itemid": int(i), "timestamp": int(t), "event": e} for i, t, e in reversed(rows)]
 
     @staticmethod
     def _status(data: dict, stale: bool) -> dict:

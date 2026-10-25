@@ -1,0 +1,82 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 876B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.11.13-slim-bookworm
+#2 ...
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.11.13-slim-bookworm
+#2 DONE 3.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 133B 0.0s done
+#4 DONE 0.1s
+
+#5 [1/9] FROM docker.io/library/python:3.11.13-slim-bookworm@sha256:86adf8dbadc3d6e82ee5dd2c74bec2e1c2467cdad47886280501df722372d2e1
+#5 resolve docker.io/library/python:3.11.13-slim-bookworm@sha256:86adf8dbadc3d6e82ee5dd2c74bec2e1c2467cdad47886280501df722372d2e1
+#5 resolve docker.io/library/python:3.11.13-slim-bookworm@sha256:86adf8dbadc3d6e82ee5dd2c74bec2e1c2467cdad47886280501df722372d2e1 0.1s done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 37.60MB 5.0s
+#6 transferring context: 87.32MB 10.0s
+#6 transferring context: 89.44MB 10.2s done
+#6 DONE 10.3s
+
+#7 [4/9] COPY requirements.txt .
+#7 CACHED
+
+#8 [7/9] COPY vendor_wheels /opt/wheels
+#8 CACHED
+
+#9 [5/9] RUN python -m pip install --no-cache-dir -r requirements.txt
+#9 CACHED
+
+#10 [6/9] COPY requirements-ml.txt .
+#10 CACHED
+
+#11 [2/9] RUN apt-get update && apt-get install -y --no-install-recommends openjdk-17-jre-headless procps     && rm -rf /var/lib/apt/lists/*     && ln -s /usr/lib/jvm/java-17-openjdk-$(dpkg --print-architecture) /opt/java
+#11 CACHED
+
+#12 [3/9] WORKDIR /app
+#12 CACHED
+
+#13 [8/9] RUN if find /opt/wheels -name '*.whl' -print -quit | grep -q .; then       python -m pip install --no-index --find-links /opt/wheels -r requirements-ml.txt;     else python -m pip install --no-cache-dir -r requirements-ml.txt; fi
+#13 CACHED
+
+#14 [9/9] COPY . /app
+#14 DONE 0.8s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 9.1s done
+#15 exporting manifest sha256:8ca72853d47258a6cc2f0e969e05cb258d1d02788654095ed252a5d9dddf8cdd 0.0s done
+#15 exporting config sha256:33902d5c70337f18853b4e0de827aa4e64d531e7992d1e1c757febc93b213def 0.0s done
+#15 exporting attestation manifest sha256:4abbcefd577cd2a421d23d4317d32d4727e6512b9da9563a23019ee1b9968586 0.0s done
+#15 exporting manifest list sha256:30e3d81177795586695d02deb469126c9a433d0bb9e5629c5939d2603fe5cbb9
+#15 exporting manifest list sha256:30e3d81177795586695d02deb469126c9a433d0bb9e5629c5939d2603fe5cbb9 0.0s done
+#15 naming to docker.io/library/retailrocket-graph:unified done
+#15 unpacking to docker.io/library/retailrocket-graph:unified
+#15 unpacking to docker.io/library/retailrocket-graph:unified 1.9s done
+#15 DONE 11.2s
+{
+  "status": "installed",
+  "run_id": "graph-full-20261024",
+  "model_version": "graph-graph-full-20261024-v1"
+}
+ Network retailrocket-graph-demo_default Creating 
+ Network retailrocket-graph-demo_default Creating 
+ Network retailrocket-graph-demo_default Created 
+ Network retailrocket-graph-demo_default Created 
+ Container retailrocket-graph-demo-api-1 Creating 
+ Container retailrocket-graph-demo-api-1 Created 
+ Container retailrocket-graph-demo-api-1 Starting 
+ Container retailrocket-graph-demo-api-1 Started 
+ Container retailrocket-graph-demo-api-1 Waiting 
+ Container retailrocket-graph-demo-api-1 Healthy 
+Graph demo: http://localhost:8002 | API: http://localhost:8002/docs

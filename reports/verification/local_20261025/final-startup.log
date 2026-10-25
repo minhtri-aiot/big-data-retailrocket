@@ -1,0 +1,11 @@
+{
+  "status": "kept_existing_graph",
+  "model_version": "graph-graph-full-20261024-v1"
+}
+ Container retailrocket-graph-demo-api-1 Recreate 
+ Container retailrocket-graph-demo-api-1 Recreated 
+ Container retailrocket-graph-demo-api-1 Starting 
+ Container retailrocket-graph-demo-api-1 Started 
+ Container retailrocket-graph-demo-api-1 Waiting 
+ Container retailrocket-graph-demo-api-1 Healthy 
+Graph demo: http://localhost:8000 | API: http://localhost:8000/docs
