@@ -1,70 +1,81 @@
-# RetailRocket — hệ thống gợi ý Graph thống nhất Phase 5–6
+# RetailRocket Session Recommender
 
-Mô hình chính duy nhất là **Graph-based Session Recommendation**: Item–Item có điều kiện + Session Transition. Apache Spark xây dựng cả hai đồ thị. FastAPI dùng artifact do Phase 5 xuất; Dashboard đọc đúng metrics của artifact đó. ALS chỉ phục vụ đối chứng, không được tự động chọn làm mô hình phục vụ.
+A graph-based recommender for e-commerce sessions. The project turns RetailRocket clickstream events into ranked product suggestions, serves them through FastAPI, and lets you inspect how recommendations change after simulated views, cart additions, and purchases.
 
-**Luồng:** RetailRocket → Kafka → Spark → Delta/HDFS + MongoDB/Redis → Graph Training (Phase 5) → FastAPI → Dashboard (Phase 6). Airflow gọi worker huấn luyện lại Graph lúc **02:00 Asia/Ho_Chi_Minh** mỗi ngày.
+[Run the demo](#run-the-demo) · [Evaluation](#evaluation) · [Vietnamese runbook](docs/GRAPH_RUNBOOK.md)
 
-## Bắt đầu với bản demo đã train
+## Run the demo
 
-Tải [bản Graph đã kiểm tra trên Windows/Docker](https://github.com/bluejames1106/big-data-retailrocket/releases/tag/graph-unified-v1).
-Kết quả kiểm tra ngày 25/10/2026 nằm tại [LOCAL_REVIEW_20261025.md](docs/LOCAL_REVIEW_20261025.md).
-
-Cài Docker Desktop (Linux containers), giải nén mã nguồn vào thư mục mới, mở PowerShell tại thư mục chứa README và chạy:
+On Windows, install Docker Desktop with Linux containers enabled. Download and extract the source bundle from the [Graph demo release](https://github.com/bluejames1106/big-data-retailrocket/releases/tag/graph-unified-v1), then run the following command from the extracted project directory in PowerShell.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run_graph_demo.ps1
 ```
 
-Mở http://localhost:8000/ và http://localhost:8000/docs. Script cài snapshot Graph đi kèm rồi chạy API. Chạy snapshot không cần Kafka, HDFS hoặc Airflow. Đây là kiểm tra luồng phục vụ, không đại diện cho việc chạy lại toàn bộ hạ tầng Big Data. Lần build đầu cần Internet. Xem [hướng dẫn đầy đủ](docs/GRAPH_RUNBOOK.md).
+Open the [interactive dashboard](http://localhost:8000/) or the [FastAPI documentation](http://localhost:8000/docs). The script builds the image, verifies the bundled pretrained snapshot, and starts the serving stack. The first build requires internet access. This demo exercises recommendation serving using the snapshot. The separate training and ingestion workflows are described in the [runbook](docs/GRAPH_RUNBOOK.md).
 
-## Train Graph
+Stop the demo with `docker compose -f compose.graph-demo.yaml down`.
 
-Python 3.11/3.12, Java 17 và các dependencies:
+## Architecture
+
+```mermaid
+flowchart LR
+    A[RetailRocket events] --> B[Kafka replay]
+    B --> C[Spark processing]
+    C --> D[Delta Lake on HDFS]
+    C --> E[MongoDB and Redis]
+    D --> F[Spark graph trainer]
+    F --> G[Versioned graph artifacts]
+    G --> H[FastAPI]
+    H --> I[Interactive dashboard]
+    J[Airflow retraining] --> F
+```
+
+The trainer builds an **item co-occurrence graph** from visitor history and a **session transition graph** from consecutive interactions within a session. The serving policy blends their normalized scores at **75% item co-occurrence and 25% session transitions**. The scorer uses recent interactions, filters previously seen items, and falls back to popular items when it has insufficient graph context.
+
+The offline evaluator and API use the same scorer. Model artifacts carry version and checksum metadata, and the dashboard displays the metrics associated with the active artifact.
+
+## Evaluation
+
+The full-data run processed **2,755,641 cleaned events**. All three methods were evaluated on the same **5,000 queries** after a time cutoff, using new items later in each session as labels. The table reports macro averages at rank 10 from the archived run.
+
+| Method | Precision@10 | Recall@10 | NDCG@10 | Hit Rate@10 |
+|---|---:|---:|---:|---:|
+| **Session graph** | **4.13%** | **28.23%** | **19.67%** | **34.46%** |
+| Spark ALS baseline | 0.15% | 0.84% | 0.49% | 1.36% |
+| Popularity baseline | 0.07% | 0.43% | 0.20% | 0.74% |
+
+The graph led on this offline benchmark. **4,213 of 5,000 queries** came from visitors absent before the cutoff, which favors a model that can use session context over the configured historical user-factor baseline. The ALS baseline used one untuned configuration, and the project has no online A/B result. The serving graph was refit on the complete cleaned history after the evaluation metrics were fixed.
+
+See the [full results and caveats](docs/GRAPH_RESULTS.md) and [Windows/Docker verification report](docs/LOCAL_REVIEW_20261025.md).
+
+## Train from source
+
+Use Python 3.11 or 3.12 in a virtual environment and Java 17 for Spark. This example trains on the included 10,000-event sample, evaluates the ALS baseline, and activates the resulting graph artifact.
 
 ```bash
 python -m pip install -r requirements-dev.txt
 python -m pipeline.graph_training --input data/sample/events_10000.csv --run-id graph-sample-01 --compare-als --activate
 python -m uvicorn service.app:app --host 127.0.0.1 --port 8000
-python -m scripts.verify_graph --run-id graph-sample-01
 ```
 
-Để train toàn nguồn, đặt `events.csv` tại `data/raw/events.csv`, thay `--input` ở lệnh trên và dùng run ID mới. CSV đầy đủ lấy từ nguồn RetailRocket/Kaggle hoặc Release cũ `storefront-v2`; nó không được thay bằng dữ liệu tổng hợp. `--compare-als` chỉ chấm một baseline ALS trên cùng cohort test, không thay đổi họ mô hình. `--full-grid` chọn tỷ lệ chuyển tiếp bằng hai fold validation; mặc định giữ chính sách Graph 75/25 đã chọn.
+With the API running, verify the artifact and serving behavior from another terminal.
 
-Để đi qua **Kafka → Spark → Storage → Graph**, dùng:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run_demo.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start_scheduler.ps1
+```bash
+python -m scripts.verify_graph --run-id graph-sample-01 --base-url http://127.0.0.1:8000
 ```
 
-DAG retrain yêu cầu một run dữ liệu tích hợp còn giữ thư mục `clean/`; snapshot demo chỉ phục vụ API không phải nguồn retrain Kafka. Không dùng snapshot demo để khẳng định scheduler đã chạy.
+The sample run is a smoke check. To reproduce the full benchmark, obtain the original RetailRocket events, place them at `data/raw/events.csv`, and follow the [full-data instructions](docs/GRAPH_RUNBOOK.md#3-train-và-kích-hoạt-model-mới). The runbook also covers the Kafka-to-Spark integration demo and the Airflow retraining worker, which requires an integrated data run with its cleaned output available.
 
-## Mô hình và đánh giá
+## Repository guide
 
-- Item–Item: đồng xuất hiện theo visitor nhị phân, giữ tối đa 20 item phân biệt gần nhất/visitor; điểm conditional có shrinkage support.
-- Transition: cạnh từ nhóm timestamp trước đến item mới của nhóm timestamp kế tiếp trong phiên gap 30 phút; không tạo cạnh giữa item đồng timestamp.
-- Tối đa 100 hàng xóm/nhánh/seed, 5 seed gần nhất, decay vị trí 0.8; trọng số view/cart/purchase **1/1/1**. Fusion điểm chuẩn hóa: **75% Item–Item + 25% Transition**, căn bậc hai độ mạnh.
-- Phiên chưa có ngữ cảnh hoặc seed chưa có cạnh: fallback phổ biến của cùng model, loại item đã tương tác. Graph không tự giải quyết item hoàn toàn mới chưa có cạnh.
-- Đánh giá: mọi item mới còn lại trong cùng phiên, K=10; Precision, Recall, NDCG, **HitRate** macro/query. Cold user/item không bị loại để tăng điểm. Đây là dự đoán tương tác, không phải xác suất mua.
-- Temporal folds 50→70%, 70→85%; test sau 85%. Metrics dùng graph fit trước cutoff; graph phục vụ được refit toàn dữ liệu sau khi metrics đã cố định.
-
-Xem [phân tích ALS và Graph](docs/ALS_VS_GRAPH.md), [kết quả đo của bản này](docs/GRAPH_RESULTS.md), [phạm vi kiểm thử](docs/GRAPH_VALIDATION.md). Các báo cáo cũ dưới `reports/` và tài liệu thí nghiệm còn được giữ để truy vết; chúng không phải số liệu của bản hiện tại.
-
-## Tài liệu và mã nguồn
-
-| Đường dẫn | Vai trò |
+| Location | Purpose |
 |---|---|
-| `pipeline/graph_training.py` | Train/evaluate/export Graph bằng Spark; CLI độc lập và entry point Delta |
-| `pipeline/session_model.py`, `session_transition.py` | Scorer dùng chung giữa offline/API |
-| `pipeline/runner.py`, `full_train.py` | Pipeline tích hợp và train toàn nguồn qua storage |
-| `service/` | FastAPI + Dashboard; xác thực phiên bản và checksum sidecars |
-| `orchestration/dags/`, `pipeline/job_server.py` | Lịch retrain và worker chỉ chấp nhận Graph |
-| `demo/graph_snapshot/` | Snapshot Graph có thể cài vào outputs, SQLite nén gzip |
-| `tests/`, `reports/verification/graph_unified/` | Kiểm thử và bằng chứng của bản sửa |
+| [`pipeline/graph_training.py`](pipeline/graph_training.py) | Spark training, temporal evaluation, and artifact export |
+| [`pipeline/session_model.py`](pipeline/session_model.py) and [`pipeline/session_transition.py`](pipeline/session_transition.py) | Shared offline and serving recommendation logic |
+| `service/` | FastAPI endpoints and dashboard |
+| `orchestration/dags/` and [`pipeline/job_server.py`](pipeline/job_server.py) | Scheduled retraining and job execution |
+| `demo/graph_snapshot/` | Compressed pretrained graph snapshot for the demo |
+| [`docs/GRAPH_VALIDATION.md`](docs/GRAPH_VALIDATION.md) | Test coverage, evidence, and reproduction commands |
 
-Hướng dẫn đưa lên repo đang có: [GITHUB_UPDATE.md](GITHUB_UPDATE.md). Bản mã nguồn này không chứa `.git`, `.env` riêng, Docker volume hoặc Docker image.
-
-Dữ liệu gốc là [Retailrocket recommender system dataset](https://www.kaggle.com/datasets/retailrocket/ecommerce-dataset),
-giấy phép [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-Snapshot và bản ghi đánh giá được tạo từ bộ dữ liệu nghiên cứu công khai có ID đã băm;
-tên, ảnh, giá trên cửa hàng là minh họa.
+The project uses the RetailRocket e-commerce clickstream dataset. Source details, preprocessing, and checksums are recorded in the [evaluation report](docs/GRAPH_RESULTS.md).
